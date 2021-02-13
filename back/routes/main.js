@@ -6,3 +6,5 @@ router.route('/')
   .get(async (req, res) => {
     res.send('main');
   });
+
+export default router;
