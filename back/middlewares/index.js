@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-// import dataBaseConnect from "./dbConnect.js";
+import dataBaseConnect from "./dbConnect.js";
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser'
 import expressSession from 'express-session'
@@ -14,7 +14,7 @@ export const config = (app) => {
   app.use(cors());
   app.use(bodyParser.json())
   app.use(cookieParser())
-  // dataBaseConnect()
+  dataBaseConnect()
   app.use(expressSession({
     store: new FileStore(),
     key:'auth',
