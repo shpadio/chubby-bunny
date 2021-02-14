@@ -3,10 +3,12 @@ import cors from 'cors';
 import dataBaseConnect from "./dbConnect.js";
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser'
-import expressSession from 'express-session'
+import session from 'express-session'
 import sessionFileStore from 'session-file-store'
+import dotenv from 'dotenv';
 
-const FileStore = sessionFileStore(expressSession)
+
+const FileStore = sessionFileStore(session)
 
 export const config = (app) => {
   app.use(express.urlencoded({ extended: true }));
@@ -15,7 +17,8 @@ export const config = (app) => {
   app.use(bodyParser.json())
   app.use(cookieParser())
   dataBaseConnect()
-  app.use(expressSession({
+  dotenv.config()
+  app.use(session({
     store: new FileStore(),
     key:'auth',
     resave:false,

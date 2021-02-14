@@ -1,10 +1,12 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import User from '../models/User.js';
-import jwt from 'jsonwebtoken'
 
-const accessTokenSecret = 'superdupersecret';
+const saltRounds = 10;
+
+
 const router = express.Router();
+
 
 router.route('/signup')
     .post(async (req, res) => {
@@ -13,12 +15,11 @@ router.route('/signup')
             const user = await User.create({
                 name,
                 email,
-                password: await bcrypt.hash(password, 10),
+                password: await bcrypt.hash(password, saltRounds),
             });
-            req.session.user = user
             res.status(200).json(user);
-        } catch (err){
-        res.status(500).json('Такой пользователь уже зарегистрирован!');
+        } catch (err) {
+            res.status(500).json('Такой пользователь уже зарегистрирован!');
         }
 
     });
@@ -27,21 +28,20 @@ router.route('/login')
     .post(async (req, res) => {
         const {email, password} = req.body;
         try {
-            const user = await User.find(email);
-            if (user && await bcrypt.compare(password, user.password)) {
-                const accessToken = jwt.sign({name: user.name}, accessTokenSecret)
-                req.session.user = user
-                res.status(200).json({user, accessToken});
-            } else {
-                throw Error('Oops!');
-            }
-        } catch (error) {
-            res.status(500).json(error.message);
+            const user = await User.findOne({email})
+            if (user && bcrypt.compare(password, user.password))
+                req.session.user = user;
+                res.status(200).json(user);
+        } catch
+            (err) {
+            res.status(500).json('Неверный логин или пароль!');
         }
-    });
+    })
 
 router.route('/logout')
     .get(async (req, res) => {
-
+ await req.session.destroy()
+        res.clearCookie('auth')
+        res.status(200).end()
     });
 export default router;

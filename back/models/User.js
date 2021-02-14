@@ -5,6 +5,7 @@ const User = mongoose.model('User', {
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
+  orders:[{type:mongoose.Schema.Types.ObjectId,ref:'Order'}]
 });
 
 export default User;
