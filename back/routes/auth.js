@@ -1,12 +1,14 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import User from '../models/User';
-
+import User from '../models/User.js';
+import jwt from 'jsonwebtoken'
+const accessTokenSecret = 'superdupersecret';
 const router = express.Router();
 
 router.route('/signup')
   .post(async (req, res) => {
     const { name, email, password } = req.body;
+
     try {
       const user = await User.create({
         name,
@@ -25,7 +27,8 @@ router.route('/login')
     try {
       const user = await User.find(email);
       if (user && bcrypt.compare(password, user.password)) {
-        res.status(200).json(user);
+          const accessToken = jwt.sign({name:user.name},accessTokenSecret)
+        res.status(200).json({user,accessToken});
       } else {
         throw Error('Oops!');
       }

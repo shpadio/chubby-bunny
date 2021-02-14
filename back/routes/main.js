@@ -3,7 +3,8 @@ import express from 'express';
 const router = express.Router();
 
 router.route('/')
-  .get(async (req, res) => {
+  .get((req, res) => {
+      console.log('H')
     res.send('main');
   });
 

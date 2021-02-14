@@ -1,7 +1,13 @@
-import mongoose from 'mongoose';
-
-const dbConnect = () => {
-  mongoose.connect('http://localhost');
-};
-
-export default dbConnect;
+// import mongoose from 'mongoose';
+//
+// const dataBaseConnect = () => {
+//     const local = 'mongodb://localhost:27017/chubbybunny';
+//     mongoose.connect(local, {
+//         useUnifiedTopology: true,
+//         useNewUrlParser: true,
+//         useCreateIndex: true,
+//         useFindAndModify:true,
+//     });
+// };
+//
+// export default dataBaseConnect
