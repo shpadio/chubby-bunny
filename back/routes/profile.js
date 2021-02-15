@@ -6,16 +6,8 @@ const router = express.Router();
 
 router.route('/')
 
-  .get(async (req, res) => {
-    const products = await Product.find({});
-    if (products) {
-      res.json({ products });
-    }
-  })
-
   .post(async (req, res) => {
     const { title, description, price } = req.body;
-
     const product = await Product.create({
       title,
       description,
@@ -32,14 +24,6 @@ router.route('/:id')
     if (orders) {
       res.json({ orders });
     }
-  })
-
-  .post(async (req, res) => {
-    const { id } = req.params;
-    const order = await Order.create({
-      customer: id,
-    });
-    res.status(200).end();
   });
 
 export default router;
