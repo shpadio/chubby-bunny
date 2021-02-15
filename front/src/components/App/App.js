@@ -11,7 +11,6 @@ import Navbar from '../Navbar/Navbar';
 function App() {
   return (
         <div>
-
             <Router>
                 <Navbar/>
                 <Switch>
