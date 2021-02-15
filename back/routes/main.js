@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
-      console.log('H')
+    console.log('H');
     res.send('main');
   });
 
