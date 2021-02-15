@@ -12,7 +12,7 @@ function AdminDashboard() {
       description: { value: description },
       price: { value: price }
     } = event.target;
-    fetch('http://localhost:4000/profile/', {
+    fetch(`${process.env.REACT_APP_URL}/profile/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/json'

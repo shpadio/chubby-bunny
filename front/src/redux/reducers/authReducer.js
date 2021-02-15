@@ -3,7 +3,10 @@ import { LOGOUT, AUTH_SUCCESSFULLY } from '../types';
 const windowState = JSON.parse(window.localStorage.getItem('state'));
 let preloadState = {};
 if (windowState && windowState.auth) {
-  preloadState = { isAuth: windowState.auth.isAuth, user: windowState.auth.user };
+  preloadState = {
+    isAuth: windowState.auth.isAuth,
+    user: windowState.auth.user
+  };
 } else {
   preloadState = { isAuth: false, user: { email: '', name: '' } };
 }
