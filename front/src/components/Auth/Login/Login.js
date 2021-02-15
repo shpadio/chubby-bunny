@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AUTH_SUCCESSFULLY } from '../../../redux/types';
 
 function Login() {
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     email: '',
     password: ''
@@ -8,16 +11,16 @@ function Login() {
 
   const [error, setError] = useState('');
 
-  const inputHandler = ({ target: { email, value } }) => {
+  const inputHandler = ({ target: { name, value } }) => {
     setInputs({
       ...inputs,
-      [email]: value
+      [name]: value
     });
   };
 
   const { email, password } = inputs;
 
-  const loginHandler = (event) => {
+  const loginHandler = async (event) => {
     event.preventDefault();
     fetch('http://localhost:4000/auth/login', {
       method: 'POST',
@@ -25,32 +28,43 @@ function Login() {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        email,
-        password
+        email, password
       })
-    }).then((result) => result.json())
-      .then((user) => console.log(user))
+    }).then((response) => response.json())
+      .then((user) => dispatch({ type: AUTH_SUCCESSFULLY, payload: user }))
       .catch(() => setError('Ошибка входа'));
   };
 
   return (
-        <form onSubmit={loginHandler}>
-            <div className="uk-margin">
-                <div className="uk-inline">
-                    <p className="uk-form-icon" href="#" uk-icon="icon: pencil"></p>
-                    <input placeholder="Email" onChange={inputHandler} name="email" className="uk-input" type="text"/>
-                </div>
-            </div>
-            <div className="uk-margin">
-                <div className="uk-inline">
-                    <p className="uk-form-icon uk-form-icon-flip" uk-icon="icon: link"></p>
-                    <input placeholder="Password" type="password" onChange={inputHandler} name="password" className="uk-input" type="text"/>
-                </div>
-            </div>
-            <button className="uk-button uk-button-primary">Primary</button>
-            <div>{error}</div>
-        </form>
 
+      <div className="column" style={{ display: 'flex', justifyContent: 'center', maxWidth: '25%' }}>
+          <form className="col s12" onSubmit={loginHandler}>
+              <div className="column">
+                  <div className="input-field col s6">
+                      <input onChange={inputHandler}
+                             name="email"
+                             placeholder="E-mail"
+                             type="text"
+                             className="validate"
+                             value={email}
+                      />
+                  </div>
+              </div>
+              <div className="input-field col s6">
+                  <input placeholder="Password"
+                         type="password"
+                         onChange={inputHandler}
+                         name="password"
+                         className="validate"
+                         value={password}
+                  />
+              </div>
+              <button className="btn waves-effect waves-light" type="submit" name="action">
+                  <i className="material-icons">Войти</i>
+              </button>
+                   <div>{error}</div>
+          </form>
+      </div>
   );
 }
 
