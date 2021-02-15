@@ -11,7 +11,6 @@ import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import Profile from '../Profile/Profile';
 import Logout from '../Auth/Logout/Logout';
 
-
 function App() {
   return (
         <div>
