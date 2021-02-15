@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
 import {
-  BrowserRouter as Router, Route, Switch
+  BrowserRouter as Router, Redirect, Route, Switch
 } from 'react-router-dom';
 // import Navbar from '../Navbar/Navbar';
+import { useSelector } from 'react-redux';
 import Login from '../Auth/Login/Login';
 import SignUp from '../Auth/SignUp/SignUp';
 import Navbar from '../Navbar/Navbar';
@@ -12,8 +13,8 @@ import Profile from '../Profile/Profile';
 import Logout from '../Auth/Logout/Logout';
 import ProtectedRouter from '../ProtectedRouter';
 
-
 function App() {
+  const isAuth = useSelector((state) => state.auth.isAuth);
   return (
         <div>
             <Router>
@@ -21,8 +22,8 @@ function App() {
                     <Navbar/>
                 </div>
                 <Switch>
-                    <Route path="/login"><Login/></Route>
-                    <Route path="/signup"><SignUp/></Route>
+                    <Route path="/login">{isAuth ? <Redirect to='/'/> : <Login/>}</Route>
+                    <Route path="/signup">{isAuth ? <Redirect to='/'/> : <SignUp/>}</Route>
                     <ProtectedRouter Component={AdminDashboard} path="/profile"/>
                     <ProtectedRouter Component={Logout} path="/logout"/>
                     <ProtectedRouter Component={Profile} path="/profile"/>
