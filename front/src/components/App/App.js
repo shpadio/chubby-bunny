@@ -12,7 +12,6 @@ import Profile from '../Profile/Profile';
 import Logout from '../Auth/Logout/Logout';
 import ProtectedRouter from '../ProtectedRouter';
 
-
 function App() {
   return (
         <div>

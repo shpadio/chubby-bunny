@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 
 const Product = mongoose.model('Product', {
-    name: String,
-    description: String
+    title: String,
+    description: String,
+    price: Number,
 });
 
 export default Product;
