@@ -7,8 +7,10 @@ import {
 import Login from '../Auth/Login/Login';
 import SignUp from '../Auth/SignUp/SignUp';
 import Navbar from '../Navbar/Navbar';
+import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import Profile from '../Profile/Profile';
 import Logout from '../Auth/Logout/Logout';
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
                 </div>
                 <Switch>
                     <Route exact path="/">
+                        <AdminDashboard />
                     </Route>
                     <Route path="/logout">
                         <Logout/>
