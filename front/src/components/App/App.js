@@ -1,21 +1,33 @@
 import React from 'react';
 import './App.css';
-import Navbar from "../Navbar/Navbar";
-import Login from "../Auth/Login/Login";
-import SignUp from "../Auth/SignUp/SignUp";
-import Order from "../Order/Order";
-import Logout from "../Auth/Logout/Logout";
+import {
+  BrowserRouter as Router, Route, Switch
+} from 'react-router-dom';
+// import Navbar from '../Navbar/Navbar';
+import Login from '../Auth/Login/Login';
+import SignUp from '../Auth/SignUp/SignUp';
+import Navbar from '../Navbar/Navbar';
 
 function App() {
-    return (
-        <div className="App">
-            <Navbar/>
-            <Login/>
-            <SignUp/>
-            <Logout/>
-            <Order/>
+  return (
+        <div>
+
+            <Router>
+                <Navbar/>
+                <Switch>
+                    <Route exact path="/">
+                    </Route>
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
+                    <Route path="/signup">
+                        <SignUp/>
+                    </Route>
+                </Switch>
+            </Router>
         </div>
-    );
+
+  );
 }
 
 export default App;
