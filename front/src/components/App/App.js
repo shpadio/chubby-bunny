@@ -16,21 +16,23 @@ import ProductList from '../ProductList/ProductList';
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
+  const isAdmin = useSelector((state) => state.auth.user.isAdmin);
+
   return (
         <div>
             <Router>
                 <div>
                     <Navbar/>
                 </div>
-                <div>
-                     <ProductList/>
-                </div>
                 <Switch>
-                    <Route path="/login">{isAuth ? <Redirect to='/'/> : <Login/>}</Route>
-                    <Route path="/signup">{isAuth ? <Redirect to='/'/> : <SignUp/>}</Route>
-                    <ProtectedRouter Component={AdminDashboard} path="/profile"/>
+                    <Route exact path="/">
+                        <ProductList/>
+                    </Route>
+                     <Route path="/login">{isAuth ? <Redirect to='/'/> : <Login/>}</Route>
+                     <Route path="/signup">{isAuth ? <Redirect to='/'/> : <SignUp/>}</Route>
+                    { isAdmin ? <ProtectedRouter Component={AdminDashboard} path="/profile"/>
+                      : <ProtectedRouter Component={Profile} path="/profile"/>}
                     <ProtectedRouter Component={Logout} path="/logout"/>
-                    <ProtectedRouter Component={Profile} path="/profile"/>
                 </Switch>
             </Router>
         </div>
