@@ -7,20 +7,30 @@ import {
 import Login from '../Auth/Login/Login';
 import SignUp from '../Auth/SignUp/SignUp';
 import Navbar from '../Navbar/Navbar';
+import Profile from '../Profile/Profile';
+import Logout from '../Auth/Logout/Logout';
 
 function App() {
   return (
         <div>
             <Router>
-                <Navbar/>
+                <div>
+                    <Navbar/>
+                </div>
                 <Switch>
                     <Route exact path="/">
+                    </Route>
+                    <Route path="/logout">
+                        <Logout/>
                     </Route>
                     <Route path="/login">
                         <Login/>
                     </Route>
                     <Route path="/signup">
                         <SignUp/>
+                    </Route>
+                    <Route path="/profile">
+                        <Profile/>
                     </Route>
                 </Switch>
             </Router>
