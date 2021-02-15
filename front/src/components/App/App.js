@@ -12,6 +12,7 @@ import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import Profile from '../Profile/Profile';
 import Logout from '../Auth/Logout/Logout';
 import ProtectedRouter from '../ProtectedRouter';
+import ProductList from '../ProductList/ProductList';
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -20,6 +21,9 @@ function App() {
             <Router>
                 <div>
                     <Navbar/>
+                </div>
+                <div>
+                     <ProductList/>
                 </div>
                 <Switch>
                     <Route path="/login">{isAuth ? <Redirect to='/'/> : <Login/>}</Route>
