@@ -7,6 +7,7 @@ import {
 import Login from '../Auth/Login/Login';
 import SignUp from '../Auth/SignUp/SignUp';
 import Navbar from '../Navbar/Navbar';
+import AdminDashboard from '../AdminDashboard/AdminDashboard';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
                 <Navbar/>
                 <Switch>
                     <Route exact path="/">
+                        <AdminDashboard />
                     </Route>
                     <Route path="/login">
                         <Login/>
