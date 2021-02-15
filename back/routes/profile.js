@@ -1,29 +1,28 @@
 import express from 'express';
 import Order from '../models/Order.js';
-import Product from "../models/Product.js";
+import Product from '../models/Product.js';
 
 const router = express.Router();
 
-
 router.route('/')
 
-    .get(async (req, res) => {
-        const products = await Product.find({});
-        if (products) {
-            res.json({ products });
-        }
-    })
+  .get(async (req, res) => {
+    const products = await Product.find({});
+    if (products) {
+      res.json({ products });
+    }
+  })
 
-    .post(async (req, res) => {
-        const { title, description, price } = req.body;
+  .post(async (req, res) => {
+    const { title, description, price } = req.body;
 
-        const product = await Product.create({
-            title,
-            description,
-            price,
-        });
-        res.json(product)
+    const product = await Product.create({
+      title,
+      description,
+      price,
     });
+    res.json(product);
+  });
 
 router.route('/:id')
 

@@ -1,10 +1,15 @@
 import express from 'express';
+import Product from '../models/Product.js';
+
 const router = express.Router();
 
 router.route('/')
-  .get((req, res) => {
-    console.log('H');
-    res.send('main');
+
+  .get(async (req, res) => {
+    const products = await Product.find({});
+    if (products) {
+      res.json(products);
+    }
   });
 
 export default router;
