@@ -35,7 +35,9 @@ function SignUp() {
 
   return (
 
-        <div className="column" style={{ display: 'flex', justifyContent: 'center', maxWidth: '25%' }}>
+        <div className="column" style={{
+          display: 'flex', justifyContent: 'center', maxWidth: '25%', margin: 'auto'
+        }}>
             <form className="col s12" onSubmit={signupHandler}>
                 <div className="column">
                     <div className="input-field col s6">
