@@ -3,7 +3,6 @@ import './App.css';
 import {
   BrowserRouter as Router, Redirect, Route, Switch
 } from 'react-router-dom';
-// import Navbar from '../Navbar/Navbar';
 import { useSelector } from 'react-redux';
 import Login from '../Auth/Login/Login';
 import SignUp from '../Auth/SignUp/SignUp';
