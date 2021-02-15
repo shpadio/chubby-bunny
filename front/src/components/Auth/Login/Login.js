@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router';
 
 function Login() {
-  // const history = useHistory();
   const [inputs, setInputs] = useState({
     email: '',
     password: ''
   });
+
   const [error, setError] = useState('');
 
-  const inputHandler = ({ target: { name, value } }) => {
+  const inputHandler = ({ target: { email, value } }) => {
     setInputs({
       ...inputs,
-      [name]: value
+      [email]: value
     });
   };
 
@@ -35,23 +34,23 @@ function Login() {
   };
 
   return (
+        <form onSubmit={loginHandler}>
+            <div className="uk-margin">
+                <div className="uk-inline">
+                    <p className="uk-form-icon" href="#" uk-icon="icon: pencil"></p>
+                    <input placeholder="Email" onChange={inputHandler} name="email" className="uk-input" type="text"/>
+                </div>
+            </div>
+            <div className="uk-margin">
+                <div className="uk-inline">
+                    <p className="uk-form-icon uk-form-icon-flip" uk-icon="icon: link"></p>
+                    <input placeholder="Password" type="password" onChange={inputHandler} name="password" className="uk-input" type="text"/>
+                </div>
+            </div>
+            <button className="uk-button uk-button-primary">Primary</button>
+            <div>{error}</div>
+        </form>
 
-        <div style={{
-          maxWidth: '20%',
-          margin: 'auto'
-        }}>
-            <form onSubmit={loginHandler} style={{
-              display: 'flex',
-              justifyContent: 'center',
-              flexDirection: 'column'
-            }}>
-                <input placeholder="Email" onChange={inputHandler} name="email"/>
-                <input placeholder="Password" type="password" onChange={inputHandler}
-                       name="password"/>
-                <button>Войти</button>
-                <div>{error}</div>
-            </form>
-        </div>
   );
 }
 
