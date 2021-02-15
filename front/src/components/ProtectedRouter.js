@@ -5,7 +5,7 @@ const ProtectedRouter = ({ Component, path, ...rest }) => {
   const isAuth = useSelector((state) => state.auth.isAuth);
   return (
       <Route path={path} {...rest}>
-          {isAuth ? <Component/> : <Redirect to='/login'/>}
+          {isAuth ? <Component/> : <Redirect to='/'/>}
       </Route>
   );
 };

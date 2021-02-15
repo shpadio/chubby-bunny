@@ -12,7 +12,6 @@ import Profile from '../Profile/Profile';
 import Logout from '../Auth/Logout/Logout';
 import ProtectedRouter from '../ProtectedRouter';
 
-
 function App() {
   return (
         <div>
@@ -21,18 +20,9 @@ function App() {
                     <Navbar/>
                 </div>
                 <Switch>
-                    <Route exact path="/">
-                        <AdminDashboard />
-                    </Route>
-                    <Route path="/logout">
-                        <Logout/>
-                    </Route>
-                    <Route path="/login">
-                        <Login/>
-                    </Route>
-                    <Route path="/signup">
-                        <SignUp/>
-                    </Route>
+                    <Route path="/login"><Login/></Route>
+                    <Route path="/signup"><SignUp/></Route>
+                    <ProtectedRouter Component={AdminDashboard} path="/profile"/>
                     <ProtectedRouter Component={Logout} path="/logout"/>
                     <ProtectedRouter Component={Profile} path="/profile"/>
                 </Switch>
