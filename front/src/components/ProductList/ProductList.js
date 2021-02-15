@@ -10,10 +10,10 @@ function ProductList() {
   }, []);
 
   return (
-    <div className="row">
-        { products && products.map((product) => <div className="col s12 m6">
-                <div className="card">
-                    <div className="card-image">
+    <div className="row" style={{ maxWidth: '100%', margin: 'auto', padding: 'auto' }}>
+        { products && products.map((product) => <div className="col s12 m6" style={{ width: '100px' }} >
+                <div className="card" >
+                    <div className="card-image" style={{ width: '100px' }} >
                         <img src="images/sample-1.jpg"/>
                         <span className="card-title">{product.title}</span>
                         <a className="btn-floating halfway-fab waves-effect waves-light red"><i

@@ -12,7 +12,6 @@ function Navbar() {
                     <li><Link to='/'>Домой</Link></li>
                     <li><Link to='/profile'>Личный кабинет</Link></li>
                     <li><Link to='/logout'>Выйти</Link></li>
-                    }
                 </ul>
                   : <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><Link to='/login'>Войти</Link></li>
