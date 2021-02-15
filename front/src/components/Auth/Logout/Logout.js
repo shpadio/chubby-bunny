@@ -6,7 +6,7 @@ function Logout() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch('http://localhost:4000/auth/logout')
+    fetch(`${process.env.REACT_APP_URL}/auth/logout`)
       .then(() => dispatch({ type: LOGOUT }));
   });
 

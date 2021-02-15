@@ -31,7 +31,7 @@ router.route('/login')
       const user = await User.findOne({ email });
       if (user && bcrypt.compare(password, user.password)) {
         req.session.user = user;
-        res.status(200).json({ user });
+        res.status(200).json(user);
       }
     } catch
     (err) {

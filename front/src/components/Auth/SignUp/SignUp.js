@@ -22,7 +22,7 @@ function SignUp() {
 
   const signupHandler = (event) => {
     event.preventDefault();
-    fetch('http://localhost:4000/auth/signup', {
+    fetch(`${process.env.REACT_APP_URL}/auth/signup`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

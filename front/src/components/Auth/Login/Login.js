@@ -22,7 +22,7 @@ function Login() {
 
   const loginHandler = async (event) => {
     event.preventDefault();
-    fetch('http://localhost:4000/auth/login', {
+    fetch(`${process.env.REACT_APP_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
