@@ -9,7 +9,6 @@ router.route('/')
 
     .get(async (req, res) => {
         const products = await Product.find({});
-
         if (products) {
             res.json({ products });
         }
@@ -23,8 +22,7 @@ router.route('/')
             description,
             price,
         });
-        console.log(product)
-        res.status(200).end();
+        res.json(product)
     });
 
 router.route('/:id')

@@ -19,8 +19,15 @@ function AdminDashboard() {
       },
       body: JSON.stringify({ title, description, price })
     })
-      .then((res) => console.log(res))
-      .then((data) => dispatch({ type: ADD_PRODUCT, payload: data }));
+      .then((res) => res.json())
+      .then((data) => dispatch({
+        type: ADD_PRODUCT,
+        payload: {
+          description: data.description,
+          price: data.price,
+          title: data.title
+        }
+      }));
   };
 
   return (
