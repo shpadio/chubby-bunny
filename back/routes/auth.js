@@ -17,6 +17,7 @@ router.route('/signup')
       });
       delete user.password;
       req.session.user = user;
+      console.log(user);
       res.status(200).json(user);
     } catch (err) {
       res.status(500).json('Такой пользователь уже зарегистрирован!');
@@ -28,8 +29,10 @@ router.route('/login')
     const { email, password } = req.body;
     try {
       const user = await User.findOne({ email });
-      if (user && bcrypt.compare(password, user.password)) req.session.user = user;
-      res.status(200).json(user);
+      if (user && bcrypt.compare(password, user.password)) {
+        req.session.user = user;
+        res.status(200).json({ user });
+      }
     } catch
     (err) {
       res.status(500).json('Неверный логин или пароль!');

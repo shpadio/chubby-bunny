@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AUTH_SUCCESSFULLY } from '../../../redux/types';
 
 function SignUp() {
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     name: '',
     email: '',
     password: ''
   });
-
-  const inputHandler = ({ target: { email, password, value } }) => {
+  const handleChange = ({ target: { name, value } }) => {
     setInputs({
       ...inputs,
-      [email]: value,
-      [password]: value
+      [name]: value
     });
   };
 
-  const [error, setError] = useState('');
-
   const { name, email, password } = inputs;
+
+  const [error, setError] = useState('');
 
   const signupHandler = (event) => {
     event.preventDefault();
@@ -28,33 +29,35 @@ function SignUp() {
       },
       body: JSON.stringify({ name, email, password })
     }).then((res) => res.json())
-      .then((user) => console.log(user))
+      .then((user) => dispatch({ type: AUTH_SUCCESSFULLY, payload: user }))
       .catch(() => setError('Ошибка регистрации'));
   };
 
   return (
-      <form onSubmit={signupHandler}>
-          <div className="uk-margin">
-              <div className="uk-inline">
-                  <p className="uk-form-icon uk-form-icon-flip" uk-icon="icon: pencil"></p>
-                  <input onChange={inputHandler} placeholder="Name" type="password" onChange={inputHandler} name="name" className="uk-input" type="text"/>
-              </div>
-          </div>
-          <div className="uk-margin">
-              <div className="uk-inline">
-                  <p className="uk-form-icon uk-form-icon-flip" uk-icon="icon: pencil"></p>
-                  <input placeholder="Email" onChange={inputHandler} name="email" className="uk-input" type="text"/>
-              </div>
-          </div>
-          <div className="uk-margin">
-              <div className="uk-inline">
-                  <p className="uk-form-icon uk-form-icon-flip" uk-icon="icon: link"></p>
-                  <input placeholder="Password" type="password" onChange={inputHandler} name="password" className="uk-input" type="text"/>
-              </div>
-          </div>
-          <button className="uk-button uk-button-primary">Зарегистрироваться</button>
-          <div>{error}</div>
-      </form>
+
+        <div className="column" style={{ display: 'flex', justifyContent: 'center', maxWidth: '25%' }}>
+            <form className="col s12" onSubmit={signupHandler}>
+                <div className="column">
+                    <div className="input-field col s6">
+                        <input onChange={handleChange} name="name" placeholder="Name" type="text"
+                               className="validate"/>
+                    </div>
+                    <div className="input-field col s6">
+                        <input onChange={handleChange} name="email" placeholder="E-mail" type="text"
+                               className="validate"/>
+                    </div>
+                </div>
+                <div className="input-field col s6">
+                    <input placeholder="Password" type="password" onChange={handleChange} name="password"
+                           className="validate"/>
+                </div>
+                <button className="btn waves-effect waves-light" type="submit" name="action">
+                    <i className="material-icons">Зарегистрироваться</i>
+                </button>
+                <div>{error}</div>
+            </form>
+        </div>
+
   );
 }
 
