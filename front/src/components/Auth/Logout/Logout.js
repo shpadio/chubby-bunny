@@ -5,17 +5,13 @@ import { LOGOUT } from '../../../redux/types';
 function Logout() {
   const dispatch = useDispatch();
 
-  const logoutHandler = () => {
+  useEffect(() => {
     fetch('http://localhost:4000/auth/logout')
       .then(() => dispatch({ type: LOGOUT }));
-  };
-  useEffect(() => {
-    logoutHandler();
   });
 
   return (
         <div>
-            <button onClick={logoutHandler}>Выйти</button>
         </div>
   );
 }

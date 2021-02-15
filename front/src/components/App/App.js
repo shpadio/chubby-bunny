@@ -10,6 +10,7 @@ import Navbar from '../Navbar/Navbar';
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import Profile from '../Profile/Profile';
 import Logout from '../Auth/Logout/Logout';
+import ProtectedRouter from '../ProtectedRouter';
 
 
 function App() {
@@ -32,9 +33,8 @@ function App() {
                     <Route path="/signup">
                         <SignUp/>
                     </Route>
-                    <Route path="/profile">
-                        <Profile/>
-                    </Route>
+                    <ProtectedRouter Component={Logout} path="/logout"/>
+                    <ProtectedRouter Component={Profile} path="/profile"/>
                 </Switch>
             </Router>
         </div>
