@@ -12,7 +12,8 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
-    'class-methods-use-this': 'off'
+    'class-methods-use-this': 'off',
+    "no-underscore-dangle": 'off'
   },
   settings: {
     'import/resolver': {

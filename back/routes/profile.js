@@ -9,21 +9,20 @@ router.route('/')
 
     .get(async (req, res) => {
         const products = await Product.find({});
-
         if (products) {
             res.json({ products });
         }
     })
 
     .post(async (req, res) => {
-        const { name, description, price } = req.body;
+        const { title, description, price } = req.body;
 
         const product = await Product.create({
-            name,
+            title,
             description,
-            price
+            price,
         });
-        res.status(200).end();
+        res.json(product)
     });
 
 router.route('/:id')
