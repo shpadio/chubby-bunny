@@ -49,7 +49,7 @@ function Product({ product }) {
                         <div className="card-action" name="price" style={{ height: '80px', color: 'black' }}>
                             {product.price} руб
                         </div>
-                            <button className="btn-floating halfway-fab waves-effect waves-light red"sq>
+                            <button className="btn-floating halfway-fab waves-effect waves-light red" sq="true">
                                 <i className="material-icons"><i className="fas fa-shopping-cart"></i>
                                 </i>
                             </button>

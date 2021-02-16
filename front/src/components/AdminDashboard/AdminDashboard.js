@@ -79,7 +79,7 @@ function AdminDashboard() {
         <section style={{
           display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto', padding: '30px'
         }}>
-            <form onSubmit={formHandler} method="POST" enctype="multipart/form-data" action="/profile" style={{
+            <form onSubmit={formHandler} method="POST" encType="multipart/form-data" action="/profile" style={{
               maxWidth: '35%',
               margin: 'auto',
               padding: '30px',
