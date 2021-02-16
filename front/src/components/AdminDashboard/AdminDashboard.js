@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
-// import { ADD_PRODUCT } from '../../redux/types';
+import { ADD_PRODUCT } from '../../redux/types';
 
 function AdminDashboard() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [state, setState] = useState({ file: '' });
 
   const formHandler = (e) => {
@@ -30,18 +30,18 @@ function AdminDashboard() {
       headers: {
         'Content-Type': 'Application/json'
       }
-    });
-    // .then(({ data }) => {
-    //   dispatch({
-    //     type: ADD_PRODUCT,
-    //     payload: {
-    //       description: data.description,
-    //       price: data.price,
-    //       title: data.title,
-    //       file: state.file
-    //     }
-    //   });
-    // });
+    })
+      .then(({ data }) => {
+        dispatch({
+          type: ADD_PRODUCT,
+          payload: {
+            description: data.description,
+            price: data.price,
+            title: data.title,
+            file: state.file
+          }
+        });
+      });
   };
   const onFileChange = (e) => {
     setState({ file: e.target.files[0] });
@@ -76,15 +76,44 @@ function AdminDashboard() {
   //     }));
   // };
   return (
-        <div>
-            <form onSubmit={formHandler} method="POST" enctype="multipart/form-data" action="/profile">
+        <section style={{
+          display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto', padding: '30px'
+        }}>
+            <form onSubmit={formHandler} method="POST" enctype="multipart/form-data" action="/profile" style={{
+              maxWidth: '35%',
+              margin: 'auto',
+              padding: '30px',
+              border: '10px pink solid',
+              borderRadius: '10%',
+              alignContent: 'spaceAround',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
                 <input type="text" name="title" placeholder="Название"/>
-                <input type="text" name="description" placeholder="Описание"/>
-                <input type="number" name="price" placeholder="Цена"/>
-                <input type="file" name="file" onChange={onFileChange}/>
-                <button type="submit">Загрузить</button>
+                <div className="row">
+                    <form className="col s12">
+                        <div className="row" style={{
+                          display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'
+                        }}>
+                            <div className="input-field col s12">
+                                <input type="number" name="price" placeholder="Цена" id="textarea1" className="materialize-textarea"></input>
+                            </div>
+                            <div className="input-field col s12">
+                                <textarea type="text" name="description" placeholder="Описание" id="textarea1" className="materialize-textarea"></textarea>
+                            </div>
+                            <div className="input-field col s12">
+                                <input type="file" name="file" onChange={onFileChange} className="materialize-textarea"></input>
+                            </div>
+                            <div className="input-field col s12">
+                                <button className="waves-effect waves-light btn-small" type="submit">Загрузить</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {/* <input /> */}
+
             </form>
-        </div>
+        </section>
   );
 }
 
