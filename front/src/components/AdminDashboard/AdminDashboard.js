@@ -16,10 +16,10 @@ function AdminDashboard() {
       price: { value: price }
     } = e.target;
     console.log(state.file.name);
-    const json = JSON.stringify({
-      title, description, price
-    });
-    console.log(json);
+    // const json = JSON.stringify({
+    //   title, description, price
+    // });
+    // console.log(json);
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
@@ -28,7 +28,7 @@ function AdminDashboard() {
 
     axios.post(`${process.env.REACT_APP_URL}/profile/`, formData, {
       headers: {
-        'Content-Type': 'Application/json'
+        'Content-Type': 'multipart/form-data'
       }
     })
       .then(({ data }) => {

@@ -8,14 +8,17 @@ function ProductList() {
     fetch(`${process.env.REACT_APP_URL}`)
       .then((response) => response.json())
       .then((data) => setProducts(data));
-  }, []);
+  }, [setProducts]);
 
   return (
-        <div style={{
-          display: 'flex', flexDirection: 'row', justifyContent: 'space-between', margin: '100px'
-        }}>
+
+        <div>
+          <div style={{
+            display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', marginTop: '50px'
+          }}>
           {products && products.map(((product) => <Product key={product._id} product={product}/>))}
         </div>
+          </div>
   );
 }
 

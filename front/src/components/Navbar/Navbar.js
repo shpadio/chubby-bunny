@@ -9,7 +9,7 @@ function Navbar() {
             <div className="nav-wrapper" style={{ backgroundColor: '#ec407a', maxHeight: '500px' }}>
                 {isAuth
                   ? <ul id="nav-mobile" className="right hide-on-med-and-down">
-                    <li><Link to='/'>Домой</Link></li>
+                    <li><Link to='/'>Главная</Link></li>
                     <li><Link to='/profile'>Личный кабинет</Link></li>
                     <li><Link to='/logout'>Выйти</Link></li>
                 </ul>
