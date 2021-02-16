@@ -6,14 +6,21 @@ function Product({ product }) {
   const dispatch = useDispatch();
   const buyHandler = (event, title, price) => {
     event.preventDefault();
-    dispatch({ type: ORDER_PRODUCT, payload: { title, price } });
+    fetch(`${process.env.REACT_APP_URL}/`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ title, price })
+    }).then((response) => response.json())
+      .then((() => dispatch({ type: ORDER_PRODUCT, payload: { title, price } })));
   };
 
   return (
         <div className="row">
             <div className="col s12 m6" style={{ display: 'flex', flexDirection: 'row' }}>
                 <div className="card" style={{
-                  width: '400px', height: '300px'
+                  width: '400px', height: '300px', border: '5px pink solid', borderRadius: '10%'
                 }}>
                     <form onSubmit={(event) => { buyHandler(event, product.title, product.price); }}
                         style={{

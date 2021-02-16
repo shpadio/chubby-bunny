@@ -43,6 +43,10 @@ router.route('/')
 
 router.route('/:id')
 
+  .post(async (req, res) => {
+    const { id } = req.params;
+  })
+
   .get(async (req, res) => {
     const { id } = req.params;
     const orders = await Order.find({ customer: id });
