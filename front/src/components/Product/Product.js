@@ -4,30 +4,49 @@ import { ORDER_PRODUCT } from '../../redux/types';
 
 function Product({ product }) {
   const dispatch = useDispatch();
-  const buyHandler = (event, title, price) => {
+  const buyHandler = (event, title, price, description, file) => {
     event.preventDefault();
-    dispatch({ type: ORDER_PRODUCT, payload: { title, price } });
+    dispatch({
+      type: ORDER_PRODUCT,
+      payload: {
+        title, price, description, file
+      }
+    });
   };
 
   return (
-        <div className="container" style={{
-          maxWidth: '100%', maxHeight: '100%', margin: 'auto', padding: 'auto'
-        }}>
-          <div className="col s12 m6" style={{ width: '100px' }} >
-                <div className="card container" >
 
-                    <form className="card-image" style={{ width: '100px' }} onSubmit={(event) => { buyHandler(event, product.title, product.price); }} >
-                        <img src="images/sample-1.jpg"/>
-                        <p className="card-title" name="title">{product.title}</p>
-                        <p className="card-title" name="price"> {product.price}</p>
-                        <button className="btn-floating halfway-fab waves-effect waves-light red"><i
-                            className="material-icons">Купить</i></button>
-                        <div className="card-content">
-                            <p>{product.description}</p>
+        <div className="row" >
+            <div className="col s12 m12" >
+                <div className="card">
+                    <form style={{ width: '300px', height: '400px' }} onSubmit={(event) => { buyHandler(event, product.title, product.price, product.description, product.file); }} >
+                        <div className="card-image">
+                            <img src={product.file} style={{
+                              maxWidth: '150px',
+                              maxHeight: '200px',
+                              marginLeft: 'auto',
+                              marginRight: 'auto'
+                            }}/>
                         </div>
+                        <span className="card-content" name="title" style={{
+                          color: 'black',
+                          fontWeight: 'bold'
+                        }}>
+                            {product.title}
+                        </span>
+                        <div className="card-content" style={{ height: '100px' }}>
+                            <div>{product.description}</div>
+                        </div>
+                        <div className="card-action" name="price" style={{ height: '80px', color: 'black' }}>
+                            {product.price} руб
+                        </div>
+                            <button className="btn-floating halfway-fab waves-effect waves-light red"sq>
+                                <i className="material-icons"><i className="fas fa-shopping-cart"></i>
+                                </i>
+                            </button>
                     </form>
                 </div>
-            </div>
+</div>
         </div>
   );
 }

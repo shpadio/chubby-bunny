@@ -7,6 +7,7 @@ router.route('/')
 
   .get(async (req, res) => {
     const products = await Product.find({});
+    console.log(products);
     if (products) {
       res.json(products);
     }

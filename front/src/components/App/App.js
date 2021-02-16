@@ -12,6 +12,8 @@ import Profile from '../Profile/Profile';
 import Logout from '../Auth/Logout/Logout';
 import ProtectedRouter from '../ProtectedRouter';
 import ProductList from '../ProductList/ProductList';
+import Footer from '../Footer/Footer';
+import logo from '../../logo.png';
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -19,9 +21,15 @@ function App() {
 
   return (
         <div>
+
             <Router>
                 <div>
                     <Navbar/>
+                </div>
+                <div>
+                    <img src={logo} alt={'logo'} style={{
+                      maxWidth: '100%', height: '200px', marginLeft: '40%'
+                    }}/>
                 </div>
                 <Switch>
                     <Route exact path="/">
@@ -34,6 +42,8 @@ function App() {
                     <ProtectedRouter Component={Logout} path="/logout"/>
                 </Switch>
             </Router>
+
+              <Footer/>
         </div>
 
   );
