@@ -4,6 +4,7 @@ import { ORDER_PRODUCT } from '../../redux/types';
 
 function Product({ product }) {
   const dispatch = useDispatch();
+
   const buyHandler = (event, title, price, description, file) => {
     event.preventDefault();
 
@@ -14,15 +15,13 @@ function Product({ product }) {
       },
       body: JSON.stringify({ title, price })
     }).then((response) => response.json())
-      .then((() => dispatch({ type: ORDER_PRODUCT, payload: { title, price } })));
+      .then((() => dispatch({
+        type: ORDER_PRODUCT,
+        payload: {
+          title, price, description, file
+        }
+      })));
   };
-
-
-
-
-
-
-
 
   return (
 
