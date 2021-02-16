@@ -1,6 +1,5 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import session from 'express-session';
 import User from '../models/User.js';
 
 const saltRounds = 10;

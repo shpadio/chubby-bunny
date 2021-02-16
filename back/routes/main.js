@@ -7,6 +7,7 @@ const router = express.Router();
 router.route('/')
 
   .get(async (req, res) => {
+    console.log(req.session.user);
     const products = await Product.find();
 
     // console.log(products);
@@ -17,7 +18,6 @@ router.route('/')
 
   .post(async (req, res) => {
     // const { user } = req.session;
-    // console.log(res.session);
     const order = await Order.create({
       number: Math.random() * 1000,
       // customer: req.sesssion.user.id,
