@@ -9,3 +9,4 @@ export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 
 // CUSTOMER
 export const ORDER_PRODUCT = 'ORDER_PRODUCT';
+export const INIT_PROFILE = 'INIT_PROFILE';
