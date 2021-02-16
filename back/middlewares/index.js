@@ -2,12 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import expressSession from 'express-session';
+import session from 'express-session';
 import sessionFileStore from 'session-file-store';
 import dotenv from 'dotenv';
 import dataBaseConnect from './dbConnect.js';
 
-const FileStore = sessionFileStore(expressSession);
+const FileStore = sessionFileStore(session);
 
 export const config = (app) => {
   dotenv.config();
@@ -19,7 +19,7 @@ export const config = (app) => {
   app.use(cookieParser());
   dataBaseConnect();
 
-  app.use(expressSession({
+  app.use(session({
     store: new FileStore(),
     key: 'auth',
     secret: 'superdupersecretword',
