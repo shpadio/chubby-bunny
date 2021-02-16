@@ -6,8 +6,6 @@ import profileRouter from './routes/profile.js';
 
 const app = express();
 config(app);
-app.use('/', mainRouter);
 app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
-
 export default app;
