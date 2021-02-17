@@ -11,7 +11,7 @@ function Product({ product }) {
 
   const handleClickToBuy = () => {
     setOpen(false);
-    history.push('/profile');
+    history.push('/cart');
   };
   const handleClickToStay = () => {
     setOpen(false);
@@ -48,7 +48,7 @@ function Product({ product }) {
                 marginRight: 'auto'
               }} />
             </div>
-            <span className="card-content" ame="title" style={{
+            <span className="card-content" name="title" style={{
               color: 'black',
               fontWeight: 'bold'
             }}>

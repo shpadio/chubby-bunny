@@ -14,10 +14,13 @@ import ProtectedRouter from '../ProtectedRouter';
 import ProductList from '../ProductList/ProductList';
 import Footer from '../Footer/Footer';
 import logo from '../../logo.png';
+import ShoppingCart from '../ShoppingCart/ShoppingCart';
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   const isAdmin = useSelector((state) => state.auth.user.isAdmin);
+
+
 
   return (
         <div>
@@ -35,15 +38,16 @@ function App() {
                     <Route exact path="/">
                         <ProductList/>
                     </Route>
-                     <Route path="/login">{isAuth ? <Redirect to='/'/> : <Login/>}</Route>
-                     <Route path="/signup">{isAuth ? <Redirect to='/'/> : <SignUp/>}</Route>
-                    { isAdmin ? <ProtectedRouter Component={AdminDashboard} path="/profile"/>
-                      : <ProtectedRouter Component={Profile} path="/profile"/>}
-                    <ProtectedRouter Component={Logout} path="/logout"/>
+                    <Route path="/login">{isAuth ? <Redirect to='/'/> : <Login/>}</Route>
+                    <Route path="/signup">{isAuth ? <Redirect to='/'/> : <SignUp/>}</Route>
+                    <ProtectedRouter Component={ShoppingCart} path="/cart"/>
+                        {isAdmin ? <ProtectedRouter Component={AdminDashboard} path="/profile"/>
+                          : <ProtectedRouter Component={Profile} path="/profile"/>}
+                          <ProtectedRouter Component={Logout} path="/logout"/>
                 </Switch>
             </Router>
 
-              <Footer/>
+            <Footer/>
         </div>
 
   );

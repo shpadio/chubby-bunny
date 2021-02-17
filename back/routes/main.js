@@ -14,7 +14,7 @@ router.route('/')
   })
 
   .post(async (req, res) => {
-    const { user } = req.session;
+    // const { user } = req.session;
 
     const order = await Order.create({
       number: Math.random() * 1000,
