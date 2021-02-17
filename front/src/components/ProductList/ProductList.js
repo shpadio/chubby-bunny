@@ -5,10 +5,10 @@ function ProductList() {
   const [products, setProducts] = useState('');
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}`)
+    fetch(`${process.env.REACT_APP_URL}/`)
       .then((response) => response.json())
       .then((data) => setProducts(data));
-  }, [setProducts]);
+  }, []);
 
   return (
 

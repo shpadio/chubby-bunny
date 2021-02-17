@@ -7,18 +7,8 @@ function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [inputs, setInputs] = useState({});
-  //
-  const [error, setError] = useState('');
-  //
-  // const inputHandler = ({ target: { name, value } }) => {
-  //   setInputs({
-  //     ...inputs,
-  //     [name]: value
-  //   });
-  // };
 
-  // const { email, password } = inputs;
+  const [error, setError] = useState('');
 
   const emailHandler = (event) => {
     setEmail(() => event.target.value);
@@ -29,7 +19,6 @@ function Login() {
   };
 
   const loginHandler = async (event) => {
-    console.log(email, password);
     event.preventDefault();
     fetch(`${process.env.REACT_APP_URL}/auth/login`, {
       method: 'POST',

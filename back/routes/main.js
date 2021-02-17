@@ -7,20 +7,19 @@ const router = express.Router();
 router.route('/')
 
   .get(async (req, res) => {
-    // console.log(req.session);
     const products = await Product.find();
-
-    // console.log(products);
     if (products) {
       res.json(products);
     }
   })
 
   .post(async (req, res) => {
-    // const { user } = req.session;
+    const { user } = req.session;
+
     const order = await Order.create({
       number: Math.random() * 1000,
-      // customer: req.sesssion.user.id,
+      // eslint-disable-next-line no-underscore-dangle
+      // customer: user.id,
     });
     await order.save();
     res.status(200).json(order);
