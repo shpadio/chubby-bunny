@@ -15,9 +15,11 @@ router.route('/signup')
         email,
         password: await bcrypt.hash(password, saltRounds),
       });
+      console.log(req.session);
       delete user.password;
       req.session.user = user;
-      console.log(user);
+      console.log(req.session.user);
+
       res.status(200).json(user);
     } catch (err) {
       res.status(500).json('Такой пользователь уже зарегистрирован!');
@@ -29,8 +31,10 @@ router.route('/login')
     const { email, password } = req.body;
     try {
       const user = await User.findOne({ email });
-      if (user && bcrypt.compare(password, user.password)) {
+      if (user && await bcrypt.compare(password, user.password)) {
+        console.log(req.session);
         req.session.user = user;
+        console.log(req.session.user);
         res.status(200).json(user);
       }
     } catch
@@ -45,4 +49,5 @@ router.route('/logout')
     res.clearCookie('auth');
     res.status(200).end();
   });
+
 export default router;

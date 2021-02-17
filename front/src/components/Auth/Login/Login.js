@@ -4,23 +4,32 @@ import { AUTH_SUCCESSFULLY } from '../../../redux/types';
 
 function Login() {
   const dispatch = useDispatch();
-  const [inputs, setInputs] = useState({
-    email: '',
-    password: ''
-  });
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // const [inputs, setInputs] = useState({});
+  //
   const [error, setError] = useState('');
+  //
+  // const inputHandler = ({ target: { name, value } }) => {
+  //   setInputs({
+  //     ...inputs,
+  //     [name]: value
+  //   });
+  // };
 
-  const inputHandler = ({ target: { name, value } }) => {
-    setInputs({
-      ...inputs,
-      [name]: value
-    });
+  // const { email, password } = inputs;
+
+  const emailHandler = (event) => {
+    setEmail(() => event.target.value);
   };
 
-  const { email, password } = inputs;
+  const passwordHandler = (event) => {
+    setPassword(() => event.target.value);
+  };
 
   const loginHandler = async (event) => {
+    console.log(email, password);
     event.preventDefault();
     fetch(`${process.env.REACT_APP_URL}/auth/login`, {
       method: 'POST',
@@ -43,7 +52,7 @@ function Login() {
           <form className="col s12" onSubmit={loginHandler}>
               <div className="column">
                   <div className="input-field col s6">
-                      <input onChange={inputHandler}
+                      <input onChange={emailHandler}
                              name="email"
                              placeholder="E-mail"
                              type="text"
@@ -55,7 +64,7 @@ function Login() {
               <div className="input-field col s6">
                   <input placeholder="Password"
                          type="password"
-                         onChange={inputHandler}
+                         onChange={passwordHandler}
                          name="password"
                          className="validate"
                          value={password}

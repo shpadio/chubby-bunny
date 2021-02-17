@@ -9,13 +9,12 @@ import dataBaseConnect from './dbConnect.js';
 
 const FileStore = sessionFileStore(session);
 
-export const config = (app) => {
+const config = (app) => {
   dotenv.config();
-  app.use(bodyParser.urlencoded({ extended: false }));
-  // app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
   app.use(cors());
   app.use('/public', express.static('public'));
-  app.use(bodyParser.json());
+  app.use(express.json());
   app.use(cookieParser());
   dataBaseConnect();
 
@@ -31,3 +30,4 @@ export const config = (app) => {
     },
   }));
 };
+export default config;
