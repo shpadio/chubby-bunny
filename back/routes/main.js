@@ -7,7 +7,7 @@ const router = express.Router();
 router.route('/')
 
   .get(async (req, res) => {
-    console.log(req.session.user);
+    // console.log(req.session);
     const products = await Product.find();
 
     // console.log(products);

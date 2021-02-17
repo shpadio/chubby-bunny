@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Product from '../Product/Product';
 
 function ProductList() {
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState('');
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}`)
