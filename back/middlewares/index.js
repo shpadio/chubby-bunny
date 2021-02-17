@@ -1,13 +1,17 @@
 import express from 'express';
 import cors from 'cors';
-import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import sessionFileStore from 'session-file-store';
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 import dataBaseConnect from './dbConnect.js';
 
 const FileStore = sessionFileStore(session);
+const maxAge = 3 * 24 * 60 * 60;
+export const createToken = (id) => jwt.sign({ id }, 'superdupersecretstring', {
+  expiresIn: maxAge,
+});
 
 const config = (app) => {
   dotenv.config();
@@ -25,7 +29,7 @@ const config = (app) => {
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 6000000,
+      expires: 600000000,
       httpOnly: false,
     },
   }));

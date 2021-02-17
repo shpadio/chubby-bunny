@@ -8,7 +8,7 @@ function Logout() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/auth/logout`)
       .then(() => dispatch({ type: LOGOUT }));
-  });
+  }, []);
 
   return (
         <div>
