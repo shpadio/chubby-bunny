@@ -13,7 +13,8 @@ module.exports = {
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
     'class-methods-use-this': 'off',
-    'no-underscore-dangle': 'off'
+    'no-underscore-dangle': 'off',
+    'no-multiple-empty-lines': 'off'
   },
   settings: {
     'import/resolver': {
