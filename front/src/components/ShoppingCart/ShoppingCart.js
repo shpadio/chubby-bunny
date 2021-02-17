@@ -1,47 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 function ShoppingCart() {
   const products = useSelector((state) => state.customer.orders);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const buyHandler = () => {
-    console.log('HUY');
-  };
+  useEffect(() => {
+    setTotalPrice(products.map((el) => el.price).reduce((a, b) => a + b));
+  }, [setTotalPrice]);
+
+  // const buyHandler = () => {
+  //   console.log('HUY');
+  // };
 
   return (
-      <section>
-        {products && products.map((product) => <div key={performance.now()} className="row">
-             <div className="col s12 m12">
-                    <div className="card">
-                        <form style={{ width: '300px', height: '400px' }} onSubmit={(event) => {
-                          buyHandler(event,
-                            product.title,
-                            product.price,
-                            product.description,
-                            product.file);
-                        }}>
-                      <span className="card-content" name="title" style={{
-                        color: 'black',
-                        fontWeight: 'bold'
-                      }}>
-               {product.title}
-            </span>
-                            <div className="card-content" style={{ height: '100px' }}>
-                                 <div>{product.description}</div>
-                            </div>
-                            <div className="card-action" name="price" style={{ height: '80px', color: 'black' }}>
-                                 {product.price} руб
-                            </div>
-                            <button type="submit" className="btn-floating halfway-fab waves-effect waves-light red"
-                                    sq="true">
-                                <i className="material-icons"><i className="fas fa-shopping-cart"></i>
-                                </i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-        </div>)}
-      </section>
+    <section style={{ width: '1000px', marginLeft: 'auto', marginRight: 'auto' }}>
+      <h3 style={{ width: '300px', marginBottom: '50px' }}>Ваш заказ</h3>
+      <form style={{ width: '1000px' }}>
+      {products && products.map((product) => <div style={{ display: 'flex' }} key={performance.now()}>
+          <div style={{ width: '200px' }}>
+            <img src={product.file} style={{
+              maxWidth: '150px',
+              maxHeight: '200px',
+              marginLeft: 'auto',
+              marginRight: 'auto'
+            }} />
+          </div>
+          <div style={{ width: '200px' }}>
+            {product.title}
+          </div>
+          <div style={{ width: '300px' }}>
+            {product.description}
+          </div>
+          <div style={{ width: '100px' }}>
+            {product.price} руб
+          </div>
+      </div>)}
+      <div style={{ marginLeft: '65%', marginBottom: '15px', fontWeight: 'bold' }}>
+            Итого: {totalPrice} руб
+          </div>
+      <a className="waves-effect blue lighten-4 btn" style={{
+        marginTop: '5px', marginBottom: '5px', color: '#435467', marginLeft: '65%'
+      }} type="submit">
+            Оплатить
+          </a>
+      </form>
+    </section>
   );
 }
 
