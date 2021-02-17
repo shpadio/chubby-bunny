@@ -10,7 +10,7 @@ function ShoppingCart() {
 
   return (
       <section>
-        {products && products.map((product) => <div className="row">
+        {products && products.map((product) => <div key={performance.now()} className="row">
              <div className="col s12 m12">
                     <div className="card">
                         <form style={{ width: '300px', height: '400px' }} onSubmit={(event) => {

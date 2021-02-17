@@ -16,7 +16,7 @@ function Product({ product }) {
   const handleClickToStay = () => {
     setOpen(false);
   };
-  const buyHandler = (event, title, price, description, file) => {
+  const buyHandler = (event, title, price, description, file, _id) => {
     event.preventDefault();
     setOpen(true);
     fetch(`${process.env.REACT_APP_URL}/`, {
@@ -29,7 +29,7 @@ function Product({ product }) {
       .then((() => dispatch({
         type: ORDER_PRODUCT,
         payload: {
-          title, price, description, file
+          title, price, description, file, _id
         }
       })));
   };
@@ -39,7 +39,7 @@ function Product({ product }) {
     <div className="row" >
       <div className="col s12 m12" >
         <div className="card">
-          <form style={{ width: '300px', height: '400px' }} onSubmit={(event) => { buyHandler(event, product.title, product.price, product.description, product.file); }} >
+          <form style={{ width: '300px', height: '400px' }} onSubmit={(event) => { buyHandler(event, product.title, product.price, product.description, product.file, product._id); }} >
             <div className="card-image">
               <img src={product.file} style={{
                 maxWidth: '150px',
