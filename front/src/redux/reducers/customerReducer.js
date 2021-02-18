@@ -1,4 +1,6 @@
-import { INIT_PROFILE, ADD_TO_CART_PRODUCT, DELETE_ITEM } from '../types';
+import {
+  INIT_PROFILE, ADD_TO_CART_PRODUCT, DELETE_ITEM, ORDER
+} from '../types';
 
 const windowState = JSON.parse(window.localStorage.getItem('state'));
 let preloadState = {};
@@ -17,6 +19,8 @@ const customerReducer = (state = preloadState, action) => {
 
     case ADD_TO_CART_PRODUCT:
       return { ...state, orders: [...state.orders, action.payload] };
+    case ORDER:
+      return { ...state, orders: [0] };
 
     case DELETE_ITEM:
       return { ...state, orders: [...state.orders.filter((el) => el.uniqueID !== action.payload)] };

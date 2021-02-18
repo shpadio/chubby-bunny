@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+// import { ORDER } from '../../redux/types';
 
 function ShoppingCart() {
   const dispatch = useDispatch();
@@ -32,26 +33,22 @@ function ShoppingCart() {
   // const buyHandler = (event,
   //   title, price, description, file, _id, uniqueID = performance.now().toFixed()) => {
   //   event.preventDefault();
-  //   if (isAuth) {
-  //     setOpen(true);
-  //     fetch(`${process.env.REACT_APP_URL}/cart/${id}`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'content-type': 'application/json'
-  //       },
-  //       body: JSON.stringify({
-  //         title, price, uniqueID
-  //       })
-  //     }).then((response) => response.json())
-  //       .then((() => dispatch({
-  //         type: ADD_TO_CART_PRODUCT,
-  //         payload: {
-  //           title, price, description, file, _id, uniqueID
-  //         }
-  //       })
-  //       ));
-  //   } else history.push('/login');
+  //   fetch(`${process.env.REACT_APP_URL}/cart/${id}`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'content-type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       title, price, uniqueID
+  //     })
+  //   }).then((response) => response.json())
+  //     .then((() => dispatch({
+  //       type: ORDER,
+  //       payload: { }
+  //     })
+  //     ));
   // };
+
 
 
 
