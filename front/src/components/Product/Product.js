@@ -35,30 +35,6 @@ function Product({ product }) {
     } else history.push('/login');
   };
 
-  // const buyHandler = (event,
-  //   title, price, description, file, _id, uniqueID = performance.now().toFixed()) => {
-  //   event.preventDefault();
-  //   if (isAuth) {
-  //     setOpen(true);
-  //     fetch(`${process.env.REACT_APP_URL}/cart/${id}`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'content-type': 'application/json'
-  //       },
-  //       body: JSON.stringify({
-  //         title, price, uniqueID
-  //       })
-  //     }).then((response) => response.json())
-  //       .then((() => dispatch({
-  //         type: ADD_TO_CART_PRODUCT,
-  //         payload: {
-  //           title, price, description, file, _id, uniqueID
-  //         }
-  //       })
-  //       ));
-  //   } else history.push('/login');
-  // };
-
   return (
 
     <div className="row" >
