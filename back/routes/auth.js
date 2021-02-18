@@ -1,14 +1,9 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { createToken } from '../middlewares/auth.js';
 
 const saltRounds = 10;
-
-// const maxAge = 3 * 24 * 60 * 60;
-// const createToken = async (id) => await jwt.sign({ id }, 'superdupersecretstring', {
-//   expiresIn: 'maxAge', httpOnly: false,
-// });
 
 const router = express.Router();
 
@@ -22,11 +17,9 @@ router.route('/signup')
         password: await bcrypt.hash(password, saltRounds),
       });
 
-      // eslint-disable-next-line no-underscore-dangle
-      req.session.user = user;
-      // const token = await createToken(user._id);
-      // res.cookie('jwt', token, { httpOnly: false, maxAge: maxAge * 1000 });
-      res.status(200).json({ user });
+      const token = createToken(user._id);
+      delete user.password;
+      res.status(200).json({ user, token });
     } catch (err) {
       res.status(500).json('Такой пользователь уже зарегистрирован!');
     }
@@ -38,16 +31,10 @@ router.route('/login')
     try {
       const user = await User.findOne({ email });
       if (user && (await bcrypt.compare(password, user.password))) {
-        // eslint-disable-next-line no-underscore-dangle
-        // eslint-disable-next-line no-underscore-dangle
-        // const token = await createToken(user._id);
-        // console.log(token);
-        // res.cookie('jwt', token, {
-        //   maxAge: maxAge * 1000, httpOnly: false,
-        // });
-        req.session.user = user;
-        console.log(req.session);
-        res.status(200).json({ user });
+        const id = user._id;
+        const token = createToken(id);
+        delete user.password;
+        res.status(200).json({ id, token });
       }
     } catch
     (err) {

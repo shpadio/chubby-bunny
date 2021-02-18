@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import {
   BrowserRouter as Router, Redirect, Route, Switch
@@ -19,7 +19,19 @@ import ShoppingCart from '../ShoppingCart/ShoppingCart';
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   const isAdmin = useSelector((state) => state.auth.user.isAdmin);
+  const token = useSelector((state) => state.auth.token);
 
+
+  const verifyToken = () => {
+    fetch(`${process.env.REACT_APP_URL}/verify`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ token })
+    }).then((response) => response.json())
+      .then((data) => console.log(data));
+  };
+
+  useEffect(() => verifyToken, []);
 
 
   return (
@@ -41,8 +53,9 @@ function App() {
                     <Route path="/login">{isAuth ? <Redirect to='/'/> : <Login/>}</Route>
                     <Route path="/signup">{isAuth ? <Redirect to='/'/> : <SignUp/>}</Route>
                     <ProtectedRouter Component={ShoppingCart} path="/cart"/>
-                        {isAdmin ? <ProtectedRouter Component={AdminDashboard} path="/profile"/>
-                          : <ProtectedRouter Component={Profile} path="/profile"/>}
+                     eslint-disable-next-line max-len
+                         {isAdmin ? <ProtectedRouter Component={AdminDashboard} path="/profile"/>
+                           : <ProtectedRouter Component={Profile} path="/profile"/>}
                           <ProtectedRouter Component={Logout} path="/logout"/>
                 </Switch>
             </Router>

@@ -29,42 +29,44 @@ function Login() {
         email, password
       })
     }).then((response) => response.json())
-      .then((user) => dispatch({ type: AUTH_SUCCESSFULLY, payload: user }))
+      .then((data) => dispatch({
+        type: AUTH_SUCCESSFULLY, payload: { user: data.id, token: data.token }
+      }))
       .catch(() => setError('Ошибка входа'));
   };
 
   return (
 
-      <div className="column" style={{
-        display: 'flex', justifyContent: 'center', maxWidth: '25%', margin: 'auto'
-      }}>
-          <form className="col s12" onSubmit={loginHandler}>
-              <div className="column">
-                  <div className="input-field col s6">
-                      <input onChange={emailHandler}
-                             name="email"
-                             placeholder="E-mail"
-                             type="text"
-                             className="validate"
-                             value={email}
-                      />
-                  </div>
-              </div>
-              <div className="input-field col s6">
-                  <input placeholder="Password"
-                         type="password"
-                         onChange={passwordHandler}
-                         name="password"
-                         className="validate"
-                         value={password}
-                  />
-              </div>
-              <button className="btn waves-effect waves-light" type="submit" name="action">
-                  <i className="material-icons">Войти</i>
-              </button>
-                   <div>{error}</div>
-          </form>
-      </div>
+        <div className="column" style={{
+          display: 'flex', justifyContent: 'center', maxWidth: '25%', margin: 'auto'
+        }}>
+            <form className="col s12" onSubmit={loginHandler}>
+                <div className="column">
+                    <div className="input-field col s6">
+                        <input onChange={emailHandler}
+                               name="email"
+                               placeholder="E-mail"
+                               type="text"
+                               className="validate"
+                               value={email}
+                        />
+                    </div>
+                </div>
+                <div className="input-field col s6">
+                    <input placeholder="Password"
+                           type="password"
+                           onChange={passwordHandler}
+                           name="password"
+                           className="validate"
+                           value={password}
+                    />
+                </div>
+                <button className="btn waves-effect waves-light" type="submit" name="action">
+                    <i className="material-icons">Войти</i>
+                </button>
+                 <div>{error}</div>
+            </form>
+        </div>
   );
 }
 

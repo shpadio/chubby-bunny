@@ -29,8 +29,9 @@ function SignUp() {
       },
       body: JSON.stringify({ name, email, password })
     }).then((res) => res.json())
-      .then((user) => dispatch({ type: AUTH_SUCCESSFULLY, payload: user }))
-      .catch(() => setError('Ошибка регистрации'));
+      .then((data) => dispatch({
+        type: AUTH_SUCCESSFULLY, payload: { user: data.id, token: data.token }
+      })).catch((err) => setError(err));
   };
 
   return (

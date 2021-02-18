@@ -9,6 +9,7 @@ function Product({ product }) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const isAuth = useSelector((state) => state.auth.isAuth);
+  const token = useSelector((state) => state.auth.token);
 
   const handleClickToBuy = () => {
     setOpen(false);
@@ -22,12 +23,14 @@ function Product({ product }) {
     event.preventDefault();
     if (isAuth) {
       setOpen(true);
-      fetch(`${process.env.REACT_APP_URL}/`, {
+      fetch(`${process.env.REACT_APP_URL}/cart`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
         },
-        body: JSON.stringify({ title, price })
+        body: JSON.stringify({
+          title, price, token, uniqueID
+        })
       }).then((response) => response.json())
         .then((() => dispatch({
           type: ADD_TO_CART_PRODUCT,
