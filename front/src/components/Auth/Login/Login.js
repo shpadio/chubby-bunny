@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { AUTH_SUCCESSFULLY } from '../../../redux/types';
 
 function Login() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,9 +31,14 @@ function Login() {
         email, password
       })
     }).then((response) => response.json())
-      .then((data) => dispatch({
-        type: AUTH_SUCCESSFULLY, payload: { user: data.id, token: data.token }
-      }))
+      .then((data) => {
+        if (data.success) {
+          localStorage.setItem('token', data.token);
+          dispatch({ type: AUTH_SUCCESSFULLY, payload: data.user });
+        } else {
+          history.push('/');
+        }
+      })
       .catch(() => setError('Ошибка входа'));
   };
 
