@@ -3,7 +3,6 @@ import multer from 'multer';
 import Order from '../models/Order.js';
 import Product from '../models/Product.js';
 
-// eslint-disable-next-line no-underscore-dangle
 const DIR = './public/';
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -31,7 +30,6 @@ const router = express.Router();
 router.route('/')
 
   .post(upload.single('file'), async (req, res) => {
-    console.log(req.body);
     const product = Product.create({
       title: req.body.title,
       description: req.body.description,
@@ -39,20 +37,14 @@ router.route('/')
       file: `../public/${req.body.file}`,
     });
     res.json(product);
-  });
-
-router.route('/:id')
-
-  .post(async (req, res) => {
-    const { id } = req.params;
   })
 
   .get(async (req, res) => {
-    const { id } = req.params;
-    const orders = await Order.find({ customer: id });
-    if (orders) {
-      res.json({ orders });
-    }
+    // const { id } = req.params;
+    // const orders = await Order.find({ customer: id });
+    // if (orders) {
+    //   res.json({ orders });
+    // }
   });
 
 export default router;
