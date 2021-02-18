@@ -29,6 +29,34 @@ function ShoppingCart() {
     dispatch({ type: 'DELETE_ITEM', payload: event.target.parentNode.id });
   };
 
+  // const buyHandler = (event,
+  //   title, price, description, file, _id, uniqueID = performance.now().toFixed()) => {
+  //   event.preventDefault();
+  //   if (isAuth) {
+  //     setOpen(true);
+  //     fetch(`${process.env.REACT_APP_URL}/cart/${id}`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'content-type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         title, price, uniqueID
+  //       })
+  //     }).then((response) => response.json())
+  //       .then((() => dispatch({
+  //         type: ADD_TO_CART_PRODUCT,
+  //         payload: {
+  //           title, price, description, file, _id, uniqueID
+  //         }
+  //       })
+  //       ));
+  //   } else history.push('/login');
+  // };
+
+
+
+
+
   return (
     <section style={{ width: '1000px', marginLeft: 'auto', marginRight: 'auto' }}>
       <h3 style={{ width: '300px', marginBottom: '50px' }}>Ваш заказ:</h3>
@@ -64,7 +92,7 @@ function ShoppingCart() {
                 </div>
 
 
-      <button className="waves-effect blue lighten-4 btn" style={{
+      <button onClick={() => console.log('sub')} className="waves-effect blue lighten-4 btn" style={{
         marginTop: '5px', marginBottom: '5px', color: '#435467', marginLeft: '87%', width: '125px'
       }} type="submit">
         Заказать

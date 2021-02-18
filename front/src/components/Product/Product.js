@@ -9,7 +9,7 @@ function Product({ product }) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const isAuth = useSelector((state) => state.auth.isAuth);
-  const token = useSelector((state) => state.auth.token);
+
 
   const handleClickToBuy = () => {
     setOpen(false);
@@ -18,27 +18,20 @@ function Product({ product }) {
   const handleClickToStay = () => {
     setOpen(false);
   };
-  const buyHandler = (event,
-    title, price, description, file, _id, uniqueID = performance.now().toFixed()) => {
+
+
+  const putToCartHandler = (event, title,
+    price,
+    description, file, _id, uniqueID = performance.now().toFixed()) => {
     event.preventDefault();
     if (isAuth) {
       setOpen(true);
-      fetch(`${process.env.REACT_APP_URL}/cart`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          title, price, token, uniqueID
-        })
-      }).then((response) => response.json())
-        .then((() => dispatch({
-          type: ADD_TO_CART_PRODUCT,
-          payload: {
-            title, price, description, file, _id, uniqueID
-          }
-        })
-        ));
+      dispatch({
+        type: ADD_TO_CART_PRODUCT,
+        payload: {
+          title, price, description, file, _id, uniqueID
+        }
+      });
     } else history.push('/login');
   };
 
@@ -47,7 +40,7 @@ function Product({ product }) {
     <div className="row" >
       <div className="col s12 m12" >
         <div className="card">
-          <form style={{ width: '300px', height: '400px' }} onSubmit={(event) => { buyHandler(event, product.title, product.price, product.description, product.file, product._id); }} >
+          <form style={{ width: '300px', height: '400px' }} onSubmit={(event) => { putToCartHandler(event, product.title, product.price, product.description, product.file, product._id); }} >
             <div className="card-image">
               <img src={product.file} style={{
                 maxWidth: '150px',
