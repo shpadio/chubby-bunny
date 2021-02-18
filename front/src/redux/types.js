@@ -8,5 +8,7 @@ export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 
 // CUSTOMER
-export const ORDER_PRODUCT = 'ORDER_PRODUCT';
 export const INIT_PROFILE = 'INIT_PROFILE';
+export const ADD_TO_CART_PRODUCT = 'ADD_TO_CART_PRODUCT';
+export const DELETE_ITEM = 'DELETE_ITEM';
+

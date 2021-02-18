@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { ORDER_PRODUCT } from '../../redux/types';
+import { ADD_TO_CART_PRODUCT } from '../../redux/types';
 import ModalWindow from './ModalWindow';
 
 function Product({ product }) {
@@ -16,7 +16,8 @@ function Product({ product }) {
   const handleClickToStay = () => {
     setOpen(false);
   };
-  const buyHandler = (event, title, price, description, file, _id) => {
+  const buyHandler = (event,
+    title, price, description, file, _id, uniqueID = performance.now().toFixed()) => {
     event.preventDefault();
     setOpen(true);
     fetch(`${process.env.REACT_APP_URL}/`, {
@@ -27,9 +28,9 @@ function Product({ product }) {
       body: JSON.stringify({ title, price })
     }).then((response) => response.json())
       .then((() => dispatch({
-        type: ORDER_PRODUCT,
+        type: ADD_TO_CART_PRODUCT,
         payload: {
-          title, price, description, file, _id
+          title, price, description, file, _id, uniqueID
         }
       })));
   };
