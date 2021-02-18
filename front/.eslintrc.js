@@ -14,7 +14,8 @@ module.exports = {
     'react/jsx-uses-vars': 'error',
     'class-methods-use-this': 'off',
     'no-underscore-dangle': 'off',
-    'no-multiple-empty-lines': 'off'
+    'no-multiple-empty-lines': 'off',
+    'no-param-reassign': 'off'
   },
   settings: {
     'import/resolver': {
