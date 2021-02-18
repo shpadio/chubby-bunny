@@ -6,9 +6,8 @@ function ShoppingCart() {
   const products = useSelector((state) => state.customer.orders);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  if (products) {
+  if (products.length >= 1) {
     useEffect(() => {
-      console.log('eff!');
       setTotalPrice(products.map((el) => el.price).reduce((a, b) => a + b));
     }, [totalPrice]);
   }
@@ -21,8 +20,7 @@ function ShoppingCart() {
   return (
         <section style={{ width: '1000px', marginLeft: 'auto', marginRight: 'auto' }}>
             <h3 style={{ width: '300px', marginBottom: '50px' }}>Ваш заказ</h3>
-            {/* <form style={{ width: '1000px' }} onSubmit={confirmHandler}> */}
-                {products && products.map((product) => <div style={{ display: 'flex' }} id={product.uniqueID} key={performance.now()}>
+                {products && products.map((product) => <div style={{ display: 'flex' }} id={product.uniqueID} key={product.uniqueID}>
                         <div style={{ width: '200px' }}>
                             <img src={product.file} style={{
                               maxWidth: '150px',
@@ -40,7 +38,6 @@ function ShoppingCart() {
                         <div style={{ width: '100px' }}>
                             {product.price} руб
                         </div>
-                        {/* <div>{product.uniqueID}</div> */}
                         <button onClick={deleteHandler} className="waves-effect red lighten-2 btn" style={{
                           marginTop: '5px', marginBottom: '5px', color: 'white'
                         }}>
@@ -57,9 +54,6 @@ function ShoppingCart() {
                 }} type="submit">
                     Оплатить
                 </button>
-
-
-            {/* </form> */}
         </section>
   );
 }
