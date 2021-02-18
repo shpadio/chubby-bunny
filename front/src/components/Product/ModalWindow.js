@@ -11,6 +11,7 @@ function ModalWindow({
       contentLabel="Minimal Modal Example"
       className="Modal"
       overlayClassName="Overlay"
+      ariaHideApp={false}
       onRequestClose={() => setOpen(false)}
     >
       <div style={{ display: 'flex', flexDirection: 'column' }}>

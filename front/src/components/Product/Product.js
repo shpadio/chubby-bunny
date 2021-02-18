@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { ADD_TO_CART_PRODUCT } from '../../redux/types';
 import ModalWindow from './ModalWindow';
@@ -8,6 +8,7 @@ function Product({ product }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   const handleClickToBuy = () => {
     setOpen(false);
@@ -19,20 +20,23 @@ function Product({ product }) {
   const buyHandler = (event,
     title, price, description, file, _id, uniqueID = performance.now().toFixed()) => {
     event.preventDefault();
-    setOpen(true);
-    fetch(`${process.env.REACT_APP_URL}/`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ title, price })
-    }).then((response) => response.json())
-      .then((() => dispatch({
-        type: ADD_TO_CART_PRODUCT,
-        payload: {
-          title, price, description, file, _id, uniqueID
-        }
-      })));
+    if (isAuth) {
+      setOpen(true);
+      fetch(`${process.env.REACT_APP_URL}/`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({ title, price })
+      }).then((response) => response.json())
+        .then((() => dispatch({
+          type: ADD_TO_CART_PRODUCT,
+          payload: {
+            title, price, description, file, _id, uniqueID
+          }
+        })
+        ));
+    } else history.push('/login');
   };
 
   return (
@@ -60,7 +64,7 @@ function Product({ product }) {
             </div>
             <div className="card-action" name="price" style={{ height: '80px', color: 'black' }}>
               {product.price} руб
-                        </div>
+            </div>
             <button type="submit" className="btn-floating halfway-fab waves-effect waves-light red" sq="true">
               <i className="material-icons"><i className="fas fa-shopping-cart"></i>
               </i>
@@ -68,12 +72,12 @@ function Product({ product }) {
           </form>
         </div>
       </div>
-      <ModalWindow
+      {isAuth ? <ModalWindow
         open={open}
         setOpen={setOpen}
         handleClickToStay={handleClickToStay}
         handleClickToBuy={handleClickToBuy}
-      />
+      /> : null}
     </div>
   );
 }
