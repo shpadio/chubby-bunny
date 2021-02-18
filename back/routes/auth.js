@@ -16,10 +16,11 @@ router.route('/signup')
         email,
         password: await bcrypt.hash(password, saltRounds),
       });
-
-      const token = createToken(user._id);
-      delete user.password;
-      res.status(200).json({ user, token });
+      const id = user._id;
+      const token = createToken(id);
+      const success = true;
+      user.password = null;
+      res.json({ user, token, success });
     } catch (err) {
       res.status(500).json('Такой пользователь уже зарегистрирован!');
     }
@@ -33,8 +34,9 @@ router.route('/login')
       if (user && (await bcrypt.compare(password, user.password))) {
         const id = user._id;
         const token = createToken(id);
-        delete user.password;
-        res.status(200).json({ id, token });
+        const success = true;
+        user.password = null;
+        res.json({ user, token, success });
       }
     } catch
     (err) {
@@ -44,7 +46,6 @@ router.route('/login')
 
 router.route('/logout')
   .get(async (req, res) => {
-    res.clearCookie('auth');
     res.status(200).end();
   });
 

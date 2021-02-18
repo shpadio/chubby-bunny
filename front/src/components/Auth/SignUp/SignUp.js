@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { AUTH_SUCCESSFULLY } from '../../../redux/types';
 
 function SignUp() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [inputs, setInputs] = useState({
     name: '',
     email: '',
@@ -29,9 +31,15 @@ function SignUp() {
       },
       body: JSON.stringify({ name, email, password })
     }).then((res) => res.json())
-      .then((data) => dispatch({
-        type: AUTH_SUCCESSFULLY, payload: { user: data.id, token: data.token }
-      })).catch((err) => setError(err));
+      .then((data) => {
+        if (data.success) {
+          localStorage.setItem('token', data.token);
+          dispatch({ type: AUTH_SUCCESSFULLY, payload: data.user });
+        } else {
+          history.push('/');
+        }
+      })
+      .catch((err) => setError(err));
   };
 
   return (

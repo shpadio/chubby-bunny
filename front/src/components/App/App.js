@@ -3,7 +3,7 @@ import './App.css';
 import {
   BrowserRouter as Router, Redirect, Route, Switch
 } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Login from '../Auth/Login/Login';
 import SignUp from '../Auth/SignUp/SignUp';
 import Navbar from '../Navbar/Navbar';
@@ -15,11 +15,13 @@ import ProductList from '../ProductList/ProductList';
 import Footer from '../Footer/Footer';
 import logo from '../../logo.png';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
+import { AUTH_SUCCESSFULLY } from '../../redux/types';
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   const isAdmin = useSelector((state) => state.auth.user.isAdmin);
   const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
 
 
   const verifyToken = () => {
@@ -28,10 +30,10 @@ function App() {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ token })
     }).then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((user) => dispatch({ type: AUTH_SUCCESSFULLY, payload: user }));
   };
 
-  useEffect(() => verifyToken, []);
+  useEffect(() => verifyToken);
 
 
   return (

@@ -2,6 +2,7 @@
 export const AUTH_SUCCESSFULLY = 'AUTH_SUCCESSFULLY';
 export const LOGOUT = 'LOGOUT';
 
+
 // ADMIN
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';

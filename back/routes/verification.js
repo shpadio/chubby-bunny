@@ -1,17 +1,27 @@
 import express from 'express';
-import { verifyToken } from '../middlewares/auth.js';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
 const router = express.Router();
 
 router.route('/')
-  .post((req, res) => {
+  .post(async (req, res) => {
     const { token } = req.body;
-    const decodedToken = verifyToken(token);
-    if (decodedToken) {
-      res.json({ status: 'success', id: decodedToken.id });
-    } else {
-      res.json({ status: 'false' });
+    try {
+      const decodedToken = () => {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+          if (err) {
+            res.json({ status: 'false' });
+          } else {
+            const { id } = decoded;
+            const user = User.findOne({ id });
+            delete user.password;
+            res.json({ status: 'success', user });
+          }
+        });
+      };
+    } catch (err) {
+      console.log(err);
     }
   });
-
 export default router;
