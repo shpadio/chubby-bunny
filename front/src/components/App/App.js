@@ -20,7 +20,7 @@ import { AUTH_SUCCESSFULLY } from '../../redux/types';
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   const isAdmin = useSelector((state) => state.auth.user.isAdmin);
-  const token = useSelector((state) => state.auth.token);
+  const token = localStorage.getItem('token');
   const dispatch = useDispatch();
 
 
@@ -33,7 +33,7 @@ function App() {
       .then((user) => dispatch({ type: AUTH_SUCCESSFULLY, payload: user }));
   };
 
-  useEffect(() => verifyToken);
+  useEffect(() => verifyToken, [dispatch]);
 
 
   return (

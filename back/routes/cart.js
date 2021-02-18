@@ -2,13 +2,16 @@ import express from 'express';
 import Order from '../models/Order.js';
 
 const router = express.Router();
-router.route('/')
+router.route('/:id')
   .post(async (req, res) => {
-    const { token } = req.body;
-    // const { id } = verifyToken(token);
+    const { id } = req.params;
+    const { uniqueID, price } = req.body;
+
     const order = await Order.create({
       number: uniqueID,
       customer: id,
+      // items: [title],
+      price,
     });
     res.status(200).json(order);
   });
