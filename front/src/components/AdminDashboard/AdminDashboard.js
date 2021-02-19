@@ -26,7 +26,7 @@ function AdminDashboard() {
     formData.append('price', price);
     formData.append('file', state.file);
 
-    axios.post(`${process.env.REACT_APP_URL}/profile/`, formData, {
+    axios.post(`${process.env.REACT_APP_URL}/admin/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -91,15 +91,15 @@ function AdminDashboard() {
             }}>
                 <input type="text" name="title" placeholder="Название"/>
                 <div className="row">
-                    <form className="col s12">
+                    <div className="col s12">
                         <div className="row" style={{
                           display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'
                         }}>
                             <div className="input-field col s12">
-                                <input type="number" name="price" placeholder="Цена" id="textarea1" className="materialize-textarea"></input>
+                                <input required={true} type="number" name="price" placeholder="Цена" id="textarea1" className="materialize-textarea"></input>
                             </div>
                             <div className="input-field col s12">
-                                <textarea type="text" name="description" placeholder="Описание" id="textarea1" className="materialize-textarea"></textarea>
+                                <textarea required={true} type="text" name="description" placeholder="Описание" id="textarea1" className="materialize-textarea"></textarea>
                             </div>
                             <div className="input-field col s12">
                                 <input type="file" name="file" onChange={onFileChange} className="materialize-textarea"></input>
@@ -108,7 +108,7 @@ function AdminDashboard() {
                                 <button className="waves-effect waves-light btn-small" type="submit">Загрузить</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 {/* <input /> */}
 

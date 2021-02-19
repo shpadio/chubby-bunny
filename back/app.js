@@ -3,6 +3,7 @@ import config from './middlewares/index.js';
 
 import authRouter from './routes/auth.js';
 import mainRouter from './routes/main.js';
+import adminRouter from './routes/admin.js';
 import profileRouter from './routes/profile.js';
 import verifyRouter from './routes/verification.js';
 import cartRouter from './routes/cart.js';
@@ -12,6 +13,7 @@ config(app);
 app.use('/', mainRouter);
 app.use('/verify', verifyRouter);
 app.use('/auth', authRouter);
+app.use('/admin', adminRouter);
 app.use('/profile', profileRouter);
 app.use('/cart', cartRouter);
 export default app;
