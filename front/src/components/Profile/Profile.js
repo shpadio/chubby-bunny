@@ -15,11 +15,12 @@ function Profile() {
 
   const orders = useSelector((state) => state.auth.user.orders);
 
+
   return (
         <div>
            Your orders:
                 <ul>
-                    {orders && orders.map(((el) => <p key={el._id}>
+                    { orders && orders.map(((el) => <p key={el._id}>
                         <li >{el.price}</li>
                         <li >{el.dateOfOrder}</li>
                     </p>)) }
