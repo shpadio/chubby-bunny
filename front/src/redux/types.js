@@ -12,4 +12,5 @@ export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const INIT_PROFILE = 'INIT_PROFILE';
 export const ADD_TO_CART_PRODUCT = 'ADD_TO_CART_PRODUCT';
 export const DELETE_ITEM = 'DELETE_ITEM';
+export const ORDER = 'ORDER';
 
