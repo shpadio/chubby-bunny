@@ -23,8 +23,8 @@ function Profile() {
 <h3>История заказов:</h3>
                 <ul>
                     { orders && orders.map(((el) => <p key={performance.now()}>
-                        <li > <span>Дата: {el.dateOfOrder.toLocaleString().slice(0, 10)}</span></li>
-                        <li > <span>Номер: {el._id.slice(-4)}</span></li>
+                        <li > <span>Дата: {el.dateOfOrder.toString().slice(0, 10)}</span></li>
+                        <li > <span>Номер: {el._id.toString().slice(-4)}</span></li>
                         <li ><span>Стоимость: {el.price} руб</span></li>
                     </p>)) }
                 </ul>
