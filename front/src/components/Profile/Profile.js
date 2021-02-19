@@ -5,17 +5,26 @@ import { INIT_PROFILE } from '../../redux/types';
 function Profile() {
   const dispatch = useDispatch();
 
-  const id = useSelector((state) => state.auth.user._id);
-
+  const user = useSelector((state) => state.auth.user);
+  const id = user._id;
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/profile/${id}`)
       .then((response) => response.json())
       .then((data) => dispatch({ type: INIT_PROFILE, payload: data }));
-  }, []);
+  }, [dispatch]);
+
+  const orders = useSelector((state) => state.auth.user.orders);
 
   return (
         <div>
-            <p>Your orders:</p>
+           Your orders:
+                <ul>
+                    {orders && orders.map(((el) => <p key={el._id}>
+                        <li >{el.price}</li>
+                        <li >{el.dateOfOrder}</li>
+                    </p>)) }
+                </ul>
+
         </div>
   );
 }
