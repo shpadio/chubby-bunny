@@ -37,13 +37,14 @@ router.route('/')
       file: `../public/${req.body.file}`,
     });
     res.json(product);
-  })
+  });
 
+router.route('/:id')
   .get(async (req, res) => {
     const { id } = req.params;
     const orders = await Order.find({ customer: id });
     if (orders) {
-      res.json({ orders });
+      res.json(orders);
     }
   });
 
