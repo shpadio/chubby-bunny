@@ -17,12 +17,15 @@ function Profile() {
 
 
   return (
-        <div>
-           Your orders:
+      <div style={{
+        display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-evenly', marginTop: '50px'
+      }}>
+<h3>История заказов:</h3>
                 <ul>
-                    { orders && orders.map(((el) => <p key={el._id}>
-                        <li >{el.price}</li>
-                        <li >{el.dateOfOrder}</li>
+                    { orders && orders.map(((el) => <p key={performance.now()}>
+                        <li > <span>Дата: {el.dateOfOrder.toLocaleString().slice(0, 10)}</span></li>
+                        <li > <span>Номер: {el._id.slice(-4)}</span></li>
+                        <li ><span>Стоимость: {el.price} руб</span></li>
                     </p>)) }
                 </ul>
 

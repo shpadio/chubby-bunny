@@ -55,7 +55,6 @@ function App() {
                     <Route path="/login">{isAuth ? <Redirect to='/'/> : <Login/>}</Route>
                     <Route path="/signup">{isAuth ? <Redirect to='/'/> : <SignUp/>}</Route>
                     <ProtectedRouter Component={ShoppingCart} path="/cart"/>
-                     eslint-disable-next-line max-len
                          {isAdmin ? <ProtectedRouter Component={AdminDashboard} path="/profile"/>
                            : <ProtectedRouter Component={Profile} path="/profile"/>}
                           <ProtectedRouter Component={Logout} path="/logout"/>
