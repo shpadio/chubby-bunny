@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { ORDER } from '../../redux/types';
+import { ORDER } from '../../redux/types';
 
 function ShoppingCart() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.customer.orders);
+  const user = useSelector((state) => state.auth.user._id);
   const [totalPrice, setTotalPrice] = useState(0);
   const [toBuy, setToBuy] = useState(null);
 
   useEffect(() => {
-    if (products.length >= 1) setTotalPrice(products.map((el) => el.price).reduce((a, b) => a + b));
-    else setTotalPrice(0);
+    if (products.length >= 1) {
+      setTotalPrice(
+        () => products.map((el) => el.price).reduce((a, b) => a + b)
+      );
+    } else setTotalPrice(0);
+
     products.forEach((el) => { el.quantity = 1; });
-    console.log(products);
     const result = Object.values(products.reduce((r, {
-      id, key, uniqueID, _id, file, title, description, quantity, price
+      key, uniqueID, _id, file, title, description, quantity, price
     }) => {
       r[title] = r[title] || {
-        id, key, uniqueID, _id, file, title, description, quantity, price: 0
+        key, uniqueID, _id, file, title, description, quantity, price: 0
       };
       r[title].price += price;
       r[title].quantity += quantity;
@@ -27,36 +31,32 @@ function ShoppingCart() {
   }, [products]);
 
   const deleteHandler = (event) => {
+    event.preventDefault();
     dispatch({ type: 'DELETE_ITEM', payload: event.target.parentNode.id });
   };
 
-  // const buyHandler = (event,
-  //   title, price, description, file, _id, uniqueID = performance.now().toFixed()) => {
-  //   event.preventDefault();
-  //   fetch(`${process.env.REACT_APP_URL}/cart/${id}`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       title, price, uniqueID
-  //     })
-  //   }).then((response) => response.json())
-  //     .then((() => dispatch({
-  //       type: ORDER,
-  //       payload: { }
-  //     })
-  //     ));
-  // };
 
 
-
-
-
+  const buyHandler = () => {
+    fetch(`${process.env.REACT_APP_URL}/cart/${user}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        user, toBuy, totalPrice
+      })
+    }).then((response) => {
+      if (response.status === 200) {
+        dispatch({ type: ORDER });
+      }
+    });
+  };
 
   return (
     <section style={{ width: '1000px', marginLeft: 'auto', marginRight: 'auto' }}>
       <h3 style={{ width: '300px', marginBottom: '50px' }}>Ваш заказ:</h3>
+
       {toBuy && toBuy.map((product) => <div style={{ display: 'flex' }} id={product.uniqueID} key={product.uniqueID}>
         <div style={{ width: '200px' }}>
           <img src={product.file} style={{
@@ -87,9 +87,7 @@ function ShoppingCart() {
       <div style={{ marginLeft: '87%', marginBottom: '15px', fontWeight: 'bold' }}>
         Итого: {totalPrice} руб
                 </div>
-
-
-      <button onClick={() => console.log('sub')} className="waves-effect blue lighten-4 btn" style={{
+      <button onClick={buyHandler} className="waves-effect blue lighten-4 btn" style={{
         marginTop: '5px', marginBottom: '5px', color: '#435467', marginLeft: '87%', width: '125px'
       }} type="submit">
         Заказать

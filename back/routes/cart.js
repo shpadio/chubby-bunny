@@ -5,13 +5,13 @@ const router = express.Router();
 router.route('/:id')
   .post(async (req, res) => {
     const { id } = req.params;
-    const { uniqueID, price } = req.body;
-
+    const { toBuy, totalPrice } = req.body;
+    const items = toBuy.map((el) => el._id);
     const order = await Order.create({
-      number: uniqueID,
+      orderNumber: toBuy.uniqueID,
       customer: id,
-      // items: [title],
-      price,
+      items,
+      price: totalPrice,
     });
     res.status(200).json(order);
   });
