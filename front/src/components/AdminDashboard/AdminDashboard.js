@@ -5,7 +5,8 @@ import { ADD_PRODUCT } from '../../redux/types';
 
 function AdminDashboard() {
   const dispatch = useDispatch();
-  const [state, setState] = useState({ file: '' });
+  const [pic, setPic] = useState({ file: '' });
+  const [usersCount, setUsersCount] = useState(0);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ function AdminDashboard() {
       description: { value: description },
       price: { value: price }
     } = e.target;
-    console.log(state.file.name);
+    console.log(pic.file.name);
     // const json = JSON.stringify({
     //   title, description, price
     // });
@@ -24,7 +25,7 @@ function AdminDashboard() {
     formData.append('title', title);
     formData.append('description', description);
     formData.append('price', price);
-    formData.append('file', state.file);
+    formData.append('file', pic.file);
 
     axios.post(`${process.env.REACT_APP_URL}/admin/`, formData, {
       headers: {
@@ -38,13 +39,13 @@ function AdminDashboard() {
             description: data.description,
             price: data.price,
             title: data.title,
-            file: state.file
+            file: pic.file
           }
         });
       });
   };
   const onFileChange = (e) => {
-    setState({ file: e.target.files[0] });
+    setPic({ file: e.target.files[0] });
   };
   // const formHandler = (event) => {
   //   event.preventDefault();
@@ -75,10 +76,28 @@ function AdminDashboard() {
   //       }
   //     }));
   // };
+
+  const statisticHandler = () => {
+    fetch(`${process.env.REACT_APP_URL}/admin`)
+      .then((response) => response.json())
+      .then((data) => setUsersCount(data.users.length));
+    // .then((data) => dispatch({ type: GET_STATISTICS, payload: data }));
+  };
+
+
+
+
   return (
         <section style={{
           display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto', padding: '30px'
         }}>
+            <div>
+                <button onClick={statisticHandler}><h3>Статистика</h3></button>
+                <p>Количество загеристрированных клиентов:{usersCount}</p>
+
+            </div>
+
+
             <form onSubmit={formHandler} method="POST" encType="multipart/form-data" action="/profile" style={{
               maxWidth: '35%',
               margin: 'auto',

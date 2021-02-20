@@ -1,6 +1,9 @@
-import { ADD_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT } from '../types';
+import {
+  ADD_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, GET_STATISTICS
 
-const adminReducer = (state = { products: [] }, action) => {
+} from '../types';
+
+const adminReducer = (state = { products: [], statistics: '' }, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
       return { ...state, products: [...state.products, action.payload] };
@@ -18,6 +21,9 @@ const adminReducer = (state = { products: [] }, action) => {
           return el;
         })]
       };
+
+    case GET_STATISTICS:
+      return { ...state, statistics: action.payload };
     default:
       return state;
   }
