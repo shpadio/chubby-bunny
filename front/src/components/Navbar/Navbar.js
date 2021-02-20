@@ -15,7 +15,7 @@ function Navbar() {
           <li><Link to='/' style={{ color: '#435467' }}>Главная</Link></li>
           {isAuth ? <><li><Link to='/cart' style={{ color: '#435467' }}><span style={{
             width: '25px', height: '25px', marginRight: '10px', fontSize: '20px', font: 'strong'
-          }}>{count}</span>Корзина</Link></li>
+          }}>{count || null}</span>Корзина</Link></li>
                    <li><Link to='/profile' style={{ color: '#435467' }}>{ isAdmin ? <span>Админка</span> : <span>Личный кабинет</span> }</Link></li>
             <li><Link to='/logout' style={{ color: '#435467' }}>Выйти</Link></li> </>
             : <><li><Link to='/login' style={{ color: '#435467' }}>Войти</Link></li>

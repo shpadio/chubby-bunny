@@ -1,6 +1,8 @@
 import express from 'express';
 import multer from 'multer';
 import Product from '../models/Product.js';
+import User from '../models/User.js';
+import Order from '../models/Order.js';
 
 const DIR = './public/';
 const storage = multer.diskStorage({
@@ -27,6 +29,12 @@ const upload = multer({
 const router = express.Router();
 
 router.route('/')
+
+  .get(async (req, res) => {
+    const users = await User.find();
+    const orders = await Order.find();
+    res.json({ users, orders });
+  })
 
   .post(upload.single('file'), async (req, res) => {
     const product = Product.create({
