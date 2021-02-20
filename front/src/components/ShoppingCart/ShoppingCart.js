@@ -38,19 +38,23 @@ function ShoppingCart() {
 
 
   const buyHandler = () => {
-    fetch(`${process.env.REACT_APP_URL}/cart/${user}`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        user, toBuy, totalPrice
-      })
-    }).then((response) => {
-      if (response.status === 200) {
-        dispatch({ type: ORDER });
-      }
-    });
+    if (toBuy.length > 0) {
+      fetch(`${process.env.REACT_APP_URL}/cart/${user}`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          user, toBuy, totalPrice
+        })
+      }).then((response) => {
+        if (response.status === 200) {
+          dispatch({ type: ORDER });
+        }
+      });
+    } else {
+      alert('Оформи заказ!');
+    }
   };
 
   return (

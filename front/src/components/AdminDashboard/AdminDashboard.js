@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { ADD_PRODUCT } from '../../redux/types';
@@ -7,6 +7,8 @@ function AdminDashboard() {
   const dispatch = useDispatch();
   const [pic, setPic] = useState({ file: '' });
   const [usersCount, setUsersCount] = useState(0);
+  const [ordersCount, setOrdersCount] = useState(0);
+  const [totalEarnings, setTotalEarnings] = useState(0);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -77,12 +79,23 @@ function AdminDashboard() {
   //     }));
   // };
 
+
+
+
   const statisticHandler = () => {
     fetch(`${process.env.REACT_APP_URL}/admin`)
       .then((response) => response.json())
-      .then((data) => setUsersCount(data.users.length));
+      .then((data) => {
+        setUsersCount(data.users.length);
+        setOrdersCount(data.orders.length);
+        setTotalEarnings(data.orders.map((el) => el.price).reduce((a, b) => a + b));
+        console.log(totalEarnings);
+      });
     // .then((data) => dispatch({ type: GET_STATISTICS, payload: data }));
   };
+  useEffect(() => {
+    statisticHandler();
+  }, []);
 
 
 
@@ -92,8 +105,10 @@ function AdminDashboard() {
           display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto', padding: '30px'
         }}>
             <div>
-                <button onClick={statisticHandler}><h3>Статистика</h3></button>
+                <h3>Статистика</h3>
                 <p>Количество загеристрированных клиентов:{usersCount}</p>
+                <p>Общее количество заказов:{ordersCount}</p>
+                <p>Сумма выручки:{totalEarnings}</p>
 
             </div>
 
