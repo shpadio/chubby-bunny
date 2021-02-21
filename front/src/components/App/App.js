@@ -33,7 +33,7 @@ function App() {
       .then((user) => dispatch({ type: AUTH_SUCCESSFULLY, payload: user }));
   };
 
-  useEffect(() => verifyToken, [dispatch]);
+  useEffect(verifyToken, [dispatch]);
 
 
   return (
