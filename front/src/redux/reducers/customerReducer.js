@@ -2,17 +2,7 @@ import {
   ADD_TO_CART_PRODUCT, DELETE_ITEM, ORDER
 } from '../types';
 
-const windowState = JSON.parse(window.localStorage.getItem('state'));
-let preloadState = {};
-if (windowState && windowState.customer) {
-  preloadState = {
-    orders: windowState.customer.orders
-  };
-} else {
-  preloadState = { orders: [] };
-}
-
-const customerReducer = (state = preloadState, action) => {
+const customerReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case ADD_TO_CART_PRODUCT:
       return { ...state, orders: [...state.orders, action.payload] };
