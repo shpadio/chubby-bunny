@@ -61,8 +61,8 @@ function Product({ product }) {
             <div className="card-action" name="price" style={{ height: '80px', color: 'black' }}>
               {product.price} руб
             </div>
-            <button type="submit" className="btn-floating halfway-fab waves-effect waves-light red" sq="true">
-              <i className="material-icons"><i className="fas fa-shopping-cart"></i>
+            <button type="submit" className="btn-floating halfway-fab waves-effect waves-light red" sq="true" style={{ zIndex: '0' }}>
+              <i className="material-icons"><i className="fas fa-shopping-cart" style={{ fontSize: '1.3rem' }}></i>
               </i>
             </button>
           </form>
