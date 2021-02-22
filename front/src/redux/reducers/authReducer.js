@@ -19,9 +19,9 @@ const authReducer = (state = preloadState, action) => {
       };
     case INIT_PROFILE:
       return { ...state, user: { ...state.user, orders: action.payload } };
-
     case LOGOUT:
       window.localStorage.removeItem('state');
+      window.localStorage.removeItem('token');
       return {
         ...state, isAuth: false, user: { }
       };
