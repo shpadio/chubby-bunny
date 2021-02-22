@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { ADD_PRODUCT } from '../../redux/types';
 
@@ -9,6 +9,7 @@ function AdminDashboard() {
   const [usersCount, setUsersCount] = useState(0);
   const [ordersCount, setOrdersCount] = useState(0);
   const [totalEarnings, setTotalEarnings] = useState(0);
+  const products = useSelector((state) => state.admin.products);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -49,37 +50,35 @@ function AdminDashboard() {
   const onFileChange = (e) => {
     setPic({ file: e.target.files[0] });
   };
-  // const formHandler = (event) => {
-  //   event.preventDefault();
-  //
-  //   const {
-  //     title: { value: title },
-  //     description: { value: description },
-  //     price: { value: price },
-  //     file: { value: file }
-  //   } = event.target;
-  //   fetch(`${process.env.REACT_APP_URL}/profile/`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'Application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       title, description, price, file
-  //     })
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => dispatch({
-  //       type: ADD_PRODUCT,
-  //       payload: {
-  //         description: data.description,
-  //         price: data.price,
-  //         title: data.title,
-  //         file: data.file
-  //       }
-  //     }));
-  // };
-
-
+    // const formHandler = (event) => {
+    //   event.preventDefault();
+    //
+    //   const {
+    //     title: { value: title },
+    //     description: { value: description },
+    //     price: { value: price },
+    //     file: { value: file }
+    //   } = event.target;
+    //   fetch(`${process.env.REACT_APP_URL}/profile/`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'Application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       title, description, price, file
+    //     })
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => dispatch({
+    //       type: ADD_PRODUCT,
+    //       payload: {
+    //         description: data.description,
+    //         price: data.price,
+    //         title: data.title,
+    //         file: data.file
+    //       }
+    //     }));
+    // };
 
 
   const statisticHandler = () => {
@@ -97,7 +96,11 @@ function AdminDashboard() {
   }, []);
 
 
+  const hideHandler = () => {
+    console.log('');
+  };
 
+  console.log(products);
 
   return (
         <section style={{
@@ -108,7 +111,15 @@ function AdminDashboard() {
                 <p>Количество загеристрированных клиентов:{usersCount}</p>
                 <p>Общее количество заказов:{ordersCount}</p>
                 <p>Сумма выручки:{totalEarnings}</p>
+            </div>
 
+            <div>
+                <h3>Продукты в наличии:</h3>
+                {products && products.map((el) => <div key={el._id}>
+                    <p>{el.title}</p>
+                    <p>{el.price}</p>
+                    <button onClick={hideHandler}>Скрыть</button>
+                </div>)}
             </div>
 
 
@@ -129,13 +140,16 @@ function AdminDashboard() {
                           display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'
                         }}>
                             <div className="input-field col s12">
-                                <input required={true} type="number" name="price" placeholder="Цена" id="textarea1" className="materialize-textarea"></input>
+                                <input required={true} type="number" name="price" placeholder="Цена" id="textarea1"
+                                       className="materialize-textarea"></input>
                             </div>
                             <div className="input-field col s12">
-                                <textarea required={true} type="text" name="description" placeholder="Описание" id="textarea1" className="materialize-textarea"></textarea>
+                                <textarea required={true} type="text" name="description" placeholder="Описание"
+                                          id="textarea1" className="materialize-textarea"></textarea>
                             </div>
                             <div className="input-field col s12">
-                                <input type="file" name="file" onChange={onFileChange} className="materialize-textarea"></input>
+                                <input type="file" name="file" onChange={onFileChange}
+                                       className="materialize-textarea"></input>
                             </div>
                             <div className="input-field col s12">
                                 <button className="waves-effect waves-light btn-small" type="submit">Загрузить</button>
