@@ -7,8 +7,10 @@ export const LOGOUT = 'LOGOUT';
 export const INIT_PRODUCTS = 'INIT_PRODUCTS';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const HIDE_PRODUCT = 'HIDE_PRODUCT';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const GET_STATISTICS = 'GET_STATISTICS';
+
 
 
 // CUSTOMER

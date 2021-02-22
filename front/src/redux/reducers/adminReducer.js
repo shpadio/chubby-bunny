@@ -1,5 +1,5 @@
 import {
-  ADD_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, GET_STATISTICS, INIT_PRODUCTS
+  ADD_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, GET_STATISTICS, INIT_PRODUCTS, HIDE_PRODUCT
 
 } from '../types';
 
@@ -21,6 +21,9 @@ const adminReducer = (state = preloadState, action) => {
       return { ...state, products: [...state.products, action.payload] };
 
     case DELETE_PRODUCT:
+      return { ...state, products: [...state.products.filter((el) => el._id !== action.payload)] };
+
+    case HIDE_PRODUCT:
       return { ...state, products: [...state.products.filter((el) => el._id !== action.payload)] };
 
     case EDIT_PRODUCT:

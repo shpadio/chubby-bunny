@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { ADD_PRODUCT } from '../../redux/types';
+import { ADD_PRODUCT, HIDE_PRODUCT } from '../../redux/types';
 
 function AddItem() {
   const dispatch = useDispatch();
   const [pic, setPic] = useState({ file: '' });
+  const products = useSelector((state) => state.admin.products);
 
-  const formHandler = (e) => {
-    e.preventDefault();
+
+  const hideHandler = (event) => {
+    dispatch({ type: HIDE_PRODUCT, payload: event.target.id });
+  };
+
+
+
+  const formHandler = (event) => {
+    event.preventDefault();
 
     const {
       title: { value: title },
       description: { value: description },
       price: { value: price }
-    } = e.target;
+    } = event.target;
     // const json = JSON.stringify({
     //   title, description, price
     // });
@@ -75,6 +83,19 @@ function AddItem() {
   //     }));
   // };
   return (
+      <>
+        <div>
+          <h3>Продукты в наличии:</h3>
+          {products && products.map((el) => <ul key={el._id}>
+            <li>
+              <p>{el.title}</p>
+              <p><img style={{ width: '150px', height: '150px' }} src={el.file}/></p>
+              <p>{el.price} руб</p>
+              <button id={el._id} onClick={(event) => hideHandler(event)}>Скрыть</button>
+            </li>
+          </ul>)}
+        </div>
+
     <div>
       <form onSubmit={formHandler} method="POST" encType="multipart/form-data" action="/profile" style={{
         width: '700px',
@@ -111,6 +132,7 @@ function AddItem() {
 
       </form>
     </div>
+        </>
   );
 }
 
