@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Product from '../Product/Product';
+import { INIT_PRODUCTS } from '../../redux/types';
 
 function ProductList() {
-  const [products, setProducts] = useState('');
+  // const [products, setProducts] = useState('');
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/`)
       .then((response) => response.json())
-      .then((data) => setProducts(data));
+      .then((data) => dispatch({ type: INIT_PRODUCTS, payload: data }));
   }, []);
 
+  const products = useSelector((state) => state.admin.products);
 
   return (
 

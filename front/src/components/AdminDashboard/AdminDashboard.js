@@ -6,10 +6,12 @@ import Statistics from './Statistics';
 import AddItem from './AddItem';
 import OrdersHistoryFinder from './OrdersHistoryFinder';
 
+
 function AdminDashboard() {
   const [usersCount, setUsersCount] = useState(0);
   const [ordersCount, setOrdersCount] = useState(0);
   const [totalEarnings, setTotalEarnings] = useState(0);
+  const products = useSelector((state) => state.admin.products);
 
   const statisticHandler = () => {
     fetch(`${process.env.REACT_APP_URL}/admin`)

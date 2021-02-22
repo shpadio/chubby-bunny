@@ -5,6 +5,7 @@ const Product = mongoose.model('Product', {
   description: String,
   price: Number,
   file: String,
+  visible: { type: Boolean, default: true },
 });
 
 export default Product;

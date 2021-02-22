@@ -9,6 +9,7 @@ function Product({ product }) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const isAuth = useSelector((state) => state.auth.isAuth);
+  const isAdmin = useSelector(((state) => state.auth.user.isAdmin));
 
 
   const handleClickToBuy = () => {
@@ -32,7 +33,7 @@ function Product({ product }) {
           title, price, description, file, _id, uniqueID
         }
       });
-    } else history.push('/login');
+    } else history.push('/signup');
   };
 
   return (
@@ -61,10 +62,12 @@ function Product({ product }) {
             <div className="card-action" name="price" style={{ height: '80px', color: 'black' }}>
               {product.price} руб
             </div>
-            <button type="submit" className="btn-floating halfway-fab waves-effect waves-light red" sq="true" style={{ zIndex: '0' }}>
-              <i className="material-icons"><i className="fas fa-shopping-cart" style={{ fontSize: '1.3rem' }}></i>
-              </i>
-            </button>
+                {!isAdmin ? <button type="submit" className="btn-floating halfway-fab waves-effect waves-light red" sq="true"
+                        style={{ zIndex: '0' }}>
+                  <i className="material-icons"><i className="fas fa-shopping-cart" style={{ fontSize: '1.3rem' }}></i>
+                  </i>
+                </button> : null
+            }
           </form>
         </div>
       </div>

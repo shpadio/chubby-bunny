@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { AUTH_SUCCESSFULLY } from '../../../redux/types';
 
 function SignUp() {
@@ -66,7 +67,13 @@ function SignUp() {
                     <i className="material-icons">Зарегистрироваться</i>
                 </button>
                 <div>{error}</div>
+                <div>
+                    <p>Вы уже зарегистрированы?</p>
+                    <Link to="/login">Войти</Link>
+                </div>
+
             </form>
+
         </div>
 
   );
