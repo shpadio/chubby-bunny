@@ -6,7 +6,6 @@ const router = express.Router();
 router.route('/:id')
   .post(async (req, res) => {
     const { id } = req.params;
-
     const { toBuy, totalPrice } = req.body;
     const items = toBuy.map((el) => el._id);
     const order = await Order.create({

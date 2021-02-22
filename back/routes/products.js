@@ -33,4 +33,4 @@ router.post('/', upload.array('images', 5), async (req, res, next) => {
   await newProduct.save();
   res.send(newProduct);
 });
-export { router as ProductRoutes };
+export default router;
