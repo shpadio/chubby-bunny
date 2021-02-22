@@ -31,7 +31,7 @@ function Profile() {
                         <li > <span>Дата: {el.dateOfOrder.toString().slice(0, 10)}</span></li>
                         {/*  */}
                         {/*  */}
-                        <li > <span>Номер: {el._id.toString().slice(-4)}</span></li>
+                        <li > <span>Номер: {el._id.toString().slice(-4)f}</span></li>
                         <li ><span>Стоимость: {el.price} руб</span></li>
                     </p>)) }
                 </ul>
