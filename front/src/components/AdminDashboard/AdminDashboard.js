@@ -100,7 +100,6 @@ function AdminDashboard() {
     console.log('');
   };
 
-  console.log(products);
 
   return (
         <section style={{
