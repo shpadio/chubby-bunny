@@ -32,7 +32,7 @@ function Product({ product }) {
           title, price, description, file, _id, uniqueID
         }
       });
-    } else history.push('/login');
+    } else history.push('/signup');
   };
 
   return (

@@ -89,7 +89,6 @@ function AdminDashboard() {
         setUsersCount(data.users.length);
         setOrdersCount(data.orders.length);
         setTotalEarnings(data.orders.map((el) => el.price).reduce((a, b) => a + b));
-        console.log(totalEarnings);
       });
     // .then((data) => dispatch({ type: GET_STATISTICS, payload: data }));
   };
