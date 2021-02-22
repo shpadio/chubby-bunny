@@ -1,11 +1,11 @@
 import express from 'express';
-import sgMail from '@sendgrid/mail';
+// import sgMail from '@sendgrid/mail';
 import Order from '../models/Order.js';
 import User from '../models/User.js';
 import Message from '../models/Message.js';
 import Product from '../models/Product.js';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const router = express.Router();
 router.route('/:id')
@@ -33,10 +33,10 @@ router.route('/:id')
            </strong>`,
     });
 
-    sgMail
-      .send(message)
-      .then(() => console.log('Message sent'))
-      .catch((err) => console.log(err));
+    // sgMail
+    //   .send(message)
+    //   .then(() => console.log('Message sent'))
+    //   .catch((err) => console.log(err));
 
     await User.findByIdAndUpdate({ _id: id }, { orders: [order] });
     res.status(200).json(order);

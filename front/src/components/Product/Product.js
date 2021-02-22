@@ -36,6 +36,8 @@ function Product({ product }) {
     } else history.push('/signup');
   };
 
+
+
   return (
 
     <div className="row" >
