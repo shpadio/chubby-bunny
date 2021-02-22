@@ -41,7 +41,7 @@ router.route('/')
       title: req.body.title,
       description: req.body.description,
       price: req.body.price,
-      file: `../public/${req.body.file}`,
+      file: `http://localhost:4000/public/${req.file.filename}`,
     });
     res.json(product);
   });
