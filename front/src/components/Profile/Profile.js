@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { INIT_PROFILE } from '../../redux/types';
+import Change from './Change';
 
 function Profile() {
   const dispatch = useDispatch();
+  const [change, setChange] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
   const id = user._id;
@@ -17,21 +19,33 @@ function Profile() {
 
 
   return (
+      <div>
+
+
       <div style={{
         display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-evenly', marginTop: '50px'
       }}>
 <h3>История заказов:</h3>
                 <ul>
                     { orders && orders.map(((el) => <p key={performance.now()}>
-                        <li > <span>Дата: {el.dateOfOrder}</span></li>
-                        {/* .toString().slice(0, 10) */}
-                        {/* .toString().slice(-4) */}
-                        <li > <span>Номер: {el._id}</span></li>
+                        <li > <span>Дата: {el.dateOfOrder.toString().slice(0, 10)}</span></li>
+                        {/*  */}
+                        {/*  */}
+                        <li > <span>Номер: {el._id.toString().slice(-4)}</span></li>
                         <li ><span>Стоимость: {el.price} руб</span></li>
                     </p>)) }
                 </ul>
-
         </div>
+           <div>
+              <div>{user.name}</div>
+              <div>{user.email}</div>
+               {
+                   change ? <Change/> : ''
+               }
+
+              <button onClick={() => setChange(!change)}>Изменить данные</button>
+           </div>
+      </div>
   );
 }
 
