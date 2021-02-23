@@ -34,7 +34,7 @@ function AdminDashboard() {
       <Router>
         <div style={{ display: 'flex' }}>
           <div className="collection" style={{
-            display: 'flex', flexDirection: 'column', width: '250px'
+            display: 'flex', flexDirection: 'column', minWidth: '250px'
           }}>
             <Link to='/profile' className="collection-item" style={{ color: 'rgb(67, 84, 103)' }}>Статистика</Link>
             <Link to='/add_item' className="collection-item" style={{ color: 'rgb(67, 84, 103)' }}>Управление товаром</Link>
