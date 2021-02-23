@@ -48,8 +48,13 @@ router.route('/')
 
   .put(async (req, res) => {
     const { id } = req.body;
-    const product = await Product.findByIdAndUpdate({ id }, { visible: !visible });
-    res.status(200);
+
+    const product = await Product.findById(id);
+
+    product.visible = !product.visible;
+    await product.save();
+
+    res.status(200).end();
   });
 
 export default router;

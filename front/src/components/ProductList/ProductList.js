@@ -4,7 +4,6 @@ import Product from '../Product/Product';
 import { INIT_PRODUCTS } from '../../redux/types';
 
 function ProductList() {
-  // const [products, setProducts] = useState('');
   const dispatch = useDispatch();
 
 

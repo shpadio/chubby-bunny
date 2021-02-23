@@ -7,7 +7,6 @@ router.route('/')
 
   .get(async (req, res) => {
     const products = await Product.find();
-    // products = products.filter((el) => el.visible);
     if (products) {
       res.json(products);
     }
