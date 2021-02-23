@@ -1,10 +1,11 @@
 import express from 'express';
-import sgMail from '@sendgrid/mail';
+// import sgMail from '@sendgrid/mail';
 import Order from '../models/Order.js';
 import User from '../models/User.js';
 import Message from '../models/Message.js';
+import Product from '../models/Product.js';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const router = express.Router();
 router.route('/:id')
@@ -12,37 +13,29 @@ router.route('/:id')
     const { id } = req.params;
     const { toBuy, totalPrice } = req.body;
     const items = toBuy.map((el) => el._id);
-
     const order = await Order.create({
       orderNumber: toBuy.uniqueID,
       customer: id,
       items,
       price: totalPrice,
     });
-    // console.log(id);
     const user = await User.findById({ _id: id });
-    const itemsToString = items.map( (el) => Order.find({ _id: el.id }));
-    // = items.map((el) => el.title);
-    console.log(items);
-    console.log(itemsToString);
+    const itemsToString = await Product.find({ _id: items });
 
     const message = await Message.create({
-      to: 'shpadio@mail.com',
-      from: 'saymedear4@gmail.com',
       subject: 'Новый заказ!',
       html:
                 `<strong> 
-            Заказ №4${order._id.toString().slice(-4)} для клиента ${user.name}
-            Следующие позиции: ${itemsToString}
+            Заказ №${order._id.toString().slice(-6)} для клиента ${user.name}
+            Следующие позиции: ${itemsToString.map((el) => el.title)}
+            На сумму ${totalPrice} руб
            </strong>`,
     });
 
-    console.log(message);
-
     // sgMail
-    // .send(message)
-    // .then(() => console.log('Message sent'));
-    // .catch((err) => console.log(err));
+    //   .send(message)
+    //   .then(() => console.log('Message sent'))
+    //   .catch((err) => console.log(err));
 
     await User.findByIdAndUpdate({ _id: id }, { orders: [order] });
     res.status(200).json(order);
