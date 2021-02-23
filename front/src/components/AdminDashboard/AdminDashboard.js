@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 import Statistics from './Statistics';
-import AddItem from './AddItem';
+import ItemsHandling from './ItemsHandling';
 import OrdersHistoryFinder from './OrdersHistoryFinder';
 
 
@@ -43,7 +43,7 @@ function AdminDashboard() {
           <div>
             <Switch>
               <Route path='/profile'><Statistics usersCount={usersCount} ordersCount={ordersCount} totalEarnings={totalEarnings} /></Route>
-              <Route path='/add_item'><AddItem /></Route>
+              <Route path='/add_item'><ItemsHandling /></Route>
               <Route path='/orders_history'><OrdersHistoryFinder /></Route>
             </Switch>
           </div>

@@ -14,7 +14,9 @@ function ProductList() {
       .then((data) => dispatch({ type: INIT_PRODUCTS, payload: data }));
   }, []);
 
-  const products = useSelector((state) => state.admin.products);
+  let products = useSelector((state) => state.admin.products);
+  products = products.filter((el) => el.visible);
+
 
   return (
 
