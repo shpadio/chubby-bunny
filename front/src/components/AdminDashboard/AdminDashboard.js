@@ -14,6 +14,7 @@ function AdminDashboard() {
   const [totalEarnings, setTotalEarnings] = useState(0);
   // const products = useSelector((state) => state.admin.products);
 
+
   const statisticHandler = () => {
     fetch(`${process.env.REACT_APP_URL}/admin`)
       .then((response) => response.json())

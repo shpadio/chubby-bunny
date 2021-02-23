@@ -20,7 +20,6 @@ router.route('/:id')
       price: totalPrice,
     });
     const user = await User.findById({ _id: id });
-
     const itemsToString = await Product.find({ _id: items });
 
     const message = await Message.create({
