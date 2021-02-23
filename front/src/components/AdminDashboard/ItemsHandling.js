@@ -3,16 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { ADD_PRODUCT, HIDE_PRODUCT } from '../../redux/types';
 
-function AddItem() {
+function ItemsHandling() {
   const dispatch = useDispatch();
   const [pic, setPic] = useState({ file: '' });
   const products = useSelector((state) => state.admin.products);
 
 
   const hideHandler = (event) => {
-    dispatch({ type: HIDE_PRODUCT, payload: event.target.id });
-  };
+    const { id } = event.target;
+    fetch(`${process.env.REACT_APP_URL}/admin`, {
+      method: 'put',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(id)
+    });
 
+    dispatch({ type: HIDE_PRODUCT, payload: id });
+  };
 
 
   const formHandler = (event) => {
@@ -23,10 +31,7 @@ function AddItem() {
       description: { value: description },
       price: { value: price }
     } = event.target;
-    // const json = JSON.stringify({
-    //   title, description, price
-    // });
-    // console.log(json);
+
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
@@ -53,35 +58,7 @@ function AddItem() {
   const onFileChange = (e) => {
     setPic({ file: e.target.files[0] });
   };
-  // const formHandler = (event) => {
-  //   event.preventDefault();
-  //
-  //   const {
-  //     title: { value: title },
-  //     description: { value: description },
-  //     price: { value: price },
-  //     file: { value: file }
-  //   } = event.target;
-  //   fetch(`${process.env.REACT_APP_URL}/profile/`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'Application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       title, description, price, file
-  //     })
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => dispatch({
-  //       type: ADD_PRODUCT,
-  //       payload: {
-  //         description: data.description,
-  //         price: data.price,
-  //         title: data.title,
-  //         file: data.file
-  //       }
-  //     }));
-  // };
+
   return (
       <>
         <div>
@@ -136,4 +113,4 @@ function AddItem() {
   );
 }
 
-export default AddItem;
+export default ItemsHandling;

@@ -44,6 +44,12 @@ router.route('/')
       file: `http://localhost:4000/public/${req.file.filename}`,
     });
     res.json(product);
+  })
+
+  .put(async (req, res) => {
+    const { id } = req.body;
+    const product = await Product.findByIdAndUpdate({ id }, { visible: !visible });
+    res.status(200);
   });
 
 export default router;
