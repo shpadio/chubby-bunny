@@ -12,6 +12,7 @@ export const GET_STATISTICS = 'GET_STATISTICS';
 
 
 
+
 // CUSTOMER
 export const INIT_PROFILE = 'INIT_PROFILE';
 export const ADD_TO_CART_PRODUCT = 'ADD_TO_CART_PRODUCT';

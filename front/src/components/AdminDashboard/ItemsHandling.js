@@ -8,11 +8,13 @@ function ItemsHandling() {
   const [pic, setPic] = useState({ file: '' });
   const products = useSelector((state) => state.admin.products);
   const [error, setError] = useState('');
+  // const [res, setRes] = useState('');
 
-  console.log(products);
+
+
+
   const hideHandler = (event) => {
     const { id } = event.target;
-    console.log(id);
     fetch(`${process.env.REACT_APP_URL}/admin`, {
       method: 'put',
       headers: {

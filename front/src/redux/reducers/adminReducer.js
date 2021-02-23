@@ -23,8 +23,6 @@ const adminReducer = (state = preloadState, action) => {
     case DELETE_PRODUCT:
       return { ...state, products: [...state.products.filter((el) => el._id !== action.payload)] };
 
-
-
     case EDIT_PRODUCT:
       return {
         ...state,
@@ -38,6 +36,8 @@ const adminReducer = (state = preloadState, action) => {
 
     case GET_STATISTICS:
       return { ...state, statistics: action.payload };
+
+
     default:
       return state;
   }
