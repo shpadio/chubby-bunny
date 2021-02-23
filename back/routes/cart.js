@@ -21,7 +21,7 @@ router.route('/:id')
     });
     // console.log(id);
     const user = await User.findById({ _id: id });
-    const itemsToString = items.map( (el) => await Order.find({ _id: el.id }));
+    const itemsToString = items.map( (el) => Order.find({ _id: el.id }));
     // = items.map((el) => el.title);
     console.log(items);
     console.log(itemsToString);
