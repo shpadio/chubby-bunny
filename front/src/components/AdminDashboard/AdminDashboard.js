@@ -12,7 +12,7 @@ function AdminDashboard() {
   const [usersCount, setUsersCount] = useState(0);
   const [ordersCount, setOrdersCount] = useState(0);
   const [totalEarnings, setTotalEarnings] = useState(0);
-  // const products = useSelector((state) => state.admin.products);
+
 
 
   const statisticHandler = () => {

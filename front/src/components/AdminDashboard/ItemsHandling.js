@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { ADD_PRODUCT, HIDE_PRODUCT } from '../../redux/types';
+import { ADD_PRODUCT } from '../../redux/types';
 
 function ItemsHandling() {
   const dispatch = useDispatch();
   const [pic, setPic] = useState({ file: '' });
   const products = useSelector((state) => state.admin.products);
+  const [error, setError] = useState('');
 
-
+  console.log(products);
   const hideHandler = (event) => {
     const { id } = event.target;
+    console.log(id);
     fetch(`${process.env.REACT_APP_URL}/admin`, {
       method: 'put',
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify(id)
-    });
-
-    dispatch({ type: HIDE_PRODUCT, payload: id });
+      body: JSON.stringify({ id })
+    }).then((response) => (response.status === 200 ? '' : setError('Упс!')));
   };
 
 
@@ -69,10 +69,17 @@ function ItemsHandling() {
                             <p>{el.title}</p>
                             <p><img style={{ width: '150px', height: '150px' }} src={el.file}/></p>
                             <p>{el.price} руб</p>
-                            {/* eslint-disable-next-line max-len */}
-                            <button id={el._id} onClick={(event) => hideHandler(event)}>Скрыть</button>
+                            {
+                                el.visible ? <button id={el._id} onClick={
+                                    (event) => hideHandler(event)}>Скрыть
+                                 </button> : <button id={el._id} onClick={
+                                     (event) => hideHandler(event)}>Показать
+                                </button>
+                            }
+
                         </li>
                     </ul>)}
+                    <span>{error}</span>
                 </div>
 
                 <div>
