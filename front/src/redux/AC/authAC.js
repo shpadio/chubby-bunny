@@ -1,15 +1,13 @@
 
-import { useState } from 'react';
 import {
-  AUTH_SUCCESSFULLY, INIT_PROFILE, LOGOUT
+  AUTH_SUCCESSFULLY, INIT_PROFILE, LOGOUT, AUTH_ERROR
 
 } from '../types';
-
-const [error, setError] = useState('');
 
 // ACTION CREATERS
 export const authSuccesfullyAC = (user) => ({ type: AUTH_SUCCESSFULLY, payload: user });
 export const logoutAC = () => ({ type: LOGOUT });
+export const authErrorAC = (error) => ({ type: AUTH_ERROR, payload: error });
 export const initProfileAC = (orders) => ({ type: INIT_PROFILE, payload: orders });
 
 // THUNK
@@ -30,8 +28,11 @@ export const loginFetchAC = ({ email, password }) => (dispatch) => {
         dispatch(authSuccesfullyAC(data.user));
       }
     })
-    .catch(() => setError(error));
+    .catch(() => dispatch(authErrorAC('Wrong email or password!')));
 };
 
 
-
+export const logoutFetchAC = (dispatch) => {
+  fetch(`${process.env.REACT_APP_URL}/auth/logout`)
+    .then(() => dispatch({ type: LOGOUT }));
+};

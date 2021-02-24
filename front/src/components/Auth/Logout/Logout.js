@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { LOGOUT } from '../../../redux/types';
+import { logoutFetchAC } from '../../../redux/AC/authAC';
 
 function Logout() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/auth/logout`)
-      .then(() => dispatch({ type: LOGOUT }));
+    logoutFetchAC(dispatch);
   }, []);
 
   return (

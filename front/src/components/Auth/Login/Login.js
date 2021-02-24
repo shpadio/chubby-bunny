@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router';
-// import { AUTH_SUCCESSFULLY } from '../../../redux/types';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { loginFetchAC } from '../../../redux/AC/authAC';
 
 function Login() {
   const dispatch = useDispatch();
-  // const history = useHistory();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const error = useSelector((state) => state.authError);
 
   const emailHandler = (event) => {
     setEmail(() => event.target.value);
@@ -24,26 +23,6 @@ function Login() {
     event.preventDefault();
     dispatch(loginFetchAC({ email, password }));
   };
-  //   fetch(`${process.env.REACT_APP_URL}/auth/login`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       email, password
-  //     })
-  //   }).then((response) => response.json())
-  //     .then((data) => {
-  //       if (data.success) {
-  //         localStorage.setItem('token', data.token);
-  //         dispatch({ type: AUTH_SUCCESSFULLY, payload: data.user });
-  //       } else {
-  //         history.push('/');
-  //       }
-  //     })
-  //     .catch(() => setError('Ошибка входа'));
-  // };
-
   return (
 
         <div className="column" style={{
@@ -73,7 +52,7 @@ function Login() {
                 <button className="btn waves-effect waves-light" type="submit" name="action">
                     <i className="material-icons">Войти</i>
                 </button>
-                  {/* <div>{error}</div> */}
+                   <div>{error}</div>
             </form>
         </div>
   );
