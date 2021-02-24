@@ -9,7 +9,8 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const error = useSelector((state) => state.authError);
+  const error = useSelector((state) => state.auth.authError);
+
 
   const emailHandler = (event) => {
     setEmail(() => event.target.value);
@@ -23,6 +24,8 @@ function Login() {
     event.preventDefault();
     dispatch(loginFetchAC({ email, password }));
   };
+
+
   return (
 
         <div className="column" style={{
