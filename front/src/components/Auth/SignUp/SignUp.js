@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { AUTH_SUCCESSFULLY } from '../../../redux/types';
+import { signUpFetchAC } from '../../../redux/AC/authAC';
 
 function SignUp() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const error = useSelector((state) => state.authError);
+
+
   const [inputs, setInputs] = useState({
     name: '',
     email: '',
@@ -21,26 +22,9 @@ function SignUp() {
 
   const { name, email, password } = inputs;
 
-  const [error, setError] = useState('');
-
   const signupHandler = (event) => {
     event.preventDefault();
-    fetch(`${process.env.REACT_APP_URL}/auth/signup`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ name, email, password })
-    }).then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          localStorage.setItem('token', data.token);
-          dispatch({ type: AUTH_SUCCESSFULLY, payload: data.user });
-        } else {
-          history.push('/');
-        }
-      })
-      .catch((err) => setError(err));
+    dispatch(signUpFetchAC({ name, email, password }));
   };
 
   return (

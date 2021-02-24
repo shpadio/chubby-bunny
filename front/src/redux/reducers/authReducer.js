@@ -1,4 +1,6 @@
-import { LOGOUT, AUTH_SUCCESSFULLY, INIT_PROFILE } from '../types';
+import {
+  LOGOUT, AUTH_SUCCESSFULLY, INIT_PROFILE, AUTH_ERROR
+} from '../types';
 
 const windowState = JSON.parse(window.localStorage.getItem('state'));
 let preloadState = {};
@@ -17,6 +19,9 @@ const authReducer = (state = preloadState, action) => {
       return {
         ...state, isAuth: true, user: action.payload
       };
+    case AUTH_ERROR:
+      return { ...state, authError: action.payload };
+
     case INIT_PROFILE:
       return { ...state, user: { ...state.user, orders: action.payload } };
     case LOGOUT:

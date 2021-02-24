@@ -10,37 +10,35 @@ const router = express.Router();
 router.route('/signup')
   .post(async (req, res) => {
     const { name, email, password } = req.body;
-    try {
-      const user = await User.create({
-        name,
-        email,
-        password: await bcrypt.hash(password, saltRounds),
-      });
+
+    const user = await User.create({
+      name,
+      email,
+      password: await bcrypt.hash(password, saltRounds),
+    });
+    if (user) {
       const id = user._id;
       const token = createToken(id);
       const success = true;
       user.password = null;
       res.json({ user, token, success });
-    } catch (err) {
-      res.status(500).json('Такой пользователь уже зарегистрирован!');
+    } else {
+      res.json({ success: false });
     }
   });
 
 router.route('/login')
   .post(async (req, res) => {
     const { email, password } = req.body;
-    try {
-      const user = await User.findOne({ email });
-      if (user && (await bcrypt.compare(password, user.password))) {
-        const id = user._id;
-        const token = createToken(id);
-        const success = true;
-        user.password = null;
-        res.json({ user, token, success });
-      }
-    } catch
-    (err) {
-      res.status(500).json('Неверный логин или пароль!');
+    const user = await User.findOne({ email });
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const id = user._id;
+      const token = createToken(id);
+      const success = true;
+      user.password = null;
+      res.json({ user, token, success });
+    } else {
+      res.json({ success: false });
     }
   });
 

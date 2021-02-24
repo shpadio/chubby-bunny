@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { INIT_PROFILE } from '../../redux/types';
 import Change from './Change';
+
+
+import { initProfileFetchAC } from '../../redux/AC/authAC';
 
 function Profile() {
   const dispatch = useDispatch();
   const [change, setChange] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
-  const id = user._id;
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/profile/${id}`)
-      .then((response) => response.json())
-      .then((data) => dispatch({ type: INIT_PROFILE, payload: data }));
-  }, [dispatch]);
+    dispatch(initProfileFetchAC(user));
+  }, []);
 
   const orders = useSelector((state) => state.auth.user.orders);
-  console.log(orders);
+
 
   return (
       <div>
