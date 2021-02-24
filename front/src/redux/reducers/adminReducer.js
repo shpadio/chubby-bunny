@@ -7,10 +7,11 @@ const windowState = JSON.parse(window.localStorage.getItem('state'));
 let preloadState = {};
 if (windowState && windowState.admin) {
   preloadState = {
-    products: windowState.admin.products
+    products: windowState.admin.products,
+    statistics: windowState.admin.statistics
   };
 } else {
-  preloadState = { products: [], statistics: '' };
+  preloadState = { products: [], statistics: [] };
 }
 
 const adminReducer = (state = preloadState, action) => {

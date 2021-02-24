@@ -13,7 +13,7 @@ function OrdersHistoryFinder() {
         <form>
           <div className="input-field">
             <input ref={search} id="search" type="search" />
-            <label className="label-icon" forHtml="search"><i className="fas fa-search"></i></label>
+            <label className="label-icon" htmlFor="search"><i className="fas fa-search"></i></label>
           </div>
         </form>
       </div>

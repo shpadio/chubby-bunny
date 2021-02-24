@@ -8,8 +8,6 @@ function ItemsHandling() {
   const [pic, setPic] = useState({ file: '' });
   const products = useSelector((state) => state.admin.products);
   const [error, setError] = useState('');
-  // const [res, setRes] = useState('');
-
 
 
 
@@ -24,10 +22,8 @@ function ItemsHandling() {
     }).then((response) => (response.status === 200 ? '' : setError('Упс!')));
   };
 
-
   const formHandler = (event) => {
     event.preventDefault();
-
     const {
       title: { value: title },
       description: { value: description },
@@ -39,7 +35,6 @@ function ItemsHandling() {
     formData.append('description', description);
     formData.append('price', price);
     formData.append('file', pic.file);
-
     axios.post(`${process.env.REACT_APP_URL}/admin/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
@@ -57,9 +52,13 @@ function ItemsHandling() {
         });
       });
   };
+
   const onFileChange = (e) => {
     setPic({ file: e.target.files[0] });
   };
+
+
+
 
   return (
         <>

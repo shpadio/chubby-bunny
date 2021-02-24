@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-function Statistics({ usersCount, ordersCount, totalEarnings }) {
+function Statistics() {
+  const statistics = useSelector((state) => state.admin.statistics);
+
   return (
     <div style={{
       width: '700px',
@@ -13,9 +16,9 @@ function Statistics({ usersCount, ordersCount, totalEarnings }) {
       alignItems: 'center'
     }}>
       <h3>Статистика</h3>
-      <p>Количество загеристрированных клиентов:{usersCount}</p>
-      <p>Общее количество заказов:{ordersCount}</p>
-      <p>Сумма выручки:{totalEarnings}</p>
+      <p>Количество загеристрированных клиентов:{statistics.users.length}</p>
+      <p>Общее количество заказов:{statistics.orders.length}</p>
+      <p>Сумма выручки:{statistics.orders.map((el) => el.price).reduce((a, b) => a + b)}</p>
     </div>
   );
 }
