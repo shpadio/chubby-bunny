@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Product from '../Product/Product';
-import { INIT_PRODUCTS } from '../../redux/types';
+import { initProductsFetchAC } from '../../redux/AC/adminAC';
 
 function ProductList() {
   const dispatch = useDispatch();
 
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_URL}/`)
-      .then((response) => response.json())
-      .then((data) => dispatch({ type: INIT_PRODUCTS, payload: data }));
+    dispatch(initProductsFetchAC());
   }, []);
 
   let products = useSelector((state) => state.admin.products);

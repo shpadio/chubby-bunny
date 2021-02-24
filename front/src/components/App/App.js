@@ -16,6 +16,7 @@ import Footer from '../Footer/Footer';
 import logo from '../../logo.png';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import { AUTH_SUCCESSFULLY } from '../../redux/types';
+import { getStatisticsFetchAC } from '../../redux/AC/adminAC';
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -33,7 +34,8 @@ function App() {
       .then((user) => dispatch({ type: AUTH_SUCCESSFULLY, payload: user }));
   };
 
-  useEffect(verifyToken, [dispatch]);
+
+  useEffect(verifyToken, dispatch(getStatisticsFetchAC()), []);
 
 
   return (
