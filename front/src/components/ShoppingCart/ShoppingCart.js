@@ -18,10 +18,10 @@ function ShoppingCart() {
 
     products.forEach((el) => { el.quantity = 1; });
     const result = Object.values(products.reduce((r, {
-      key, uniqueID, _id, file, title, description, quantity, price
+      key, _id, file, title, description, quantity, price
     }) => {
       r[title] = r[title] || {
-        key, uniqueID, _id, file, title, description, quantity, price: 0
+        key, _id, file, title, description, quantity, price: 0
       };
       r[title].price += price;
       r[title].quantity += quantity;

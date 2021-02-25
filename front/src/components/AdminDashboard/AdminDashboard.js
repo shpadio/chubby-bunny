@@ -26,9 +26,7 @@ function AdminDashboard() {
                     </div>
                     <div>
                         <Switch>
-                            <Route path='/profile'>
-                                     <Statistics/>
-                                </Route>
+                            <Route path='/profile'><Statistics/></Route>
                             <Route path='/add_item'><ItemsHandling/></Route>
                             <Route path='/orders_history'><OrdersHistoryFinder/></Route>
                         </Switch>

@@ -32,7 +32,7 @@ router.route('/')
 
   .get(async (req, res) => {
     const users = await User.find();
-    const orders = await Order.find();
+    const orders = await Order.find().populate('customer').populate('items');
     res.json({ users, orders });
   })
 
