@@ -1,10 +1,10 @@
 import express from 'express';
 // import sgMail from '@sendgrid/mail';
+import generateUniqueId from 'generate-unique-id';
 import Order from '../models/Order.js';
 import User from '../models/User.js';
 import Message from '../models/Message.js';
 import Product from '../models/Product.js';
-
 // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const router = express.Router();
@@ -13,8 +13,10 @@ router.route('/:id')
     const { id } = req.params;
     const { toBuy, totalPrice } = req.body;
     const items = toBuy.map((el) => el._id);
+    const orderNumber = generateUniqueId({ length: 6, useLetters: false, useNumbers: true });
+
     const order = await Order.create({
-      orderNumber: toBuy.uniqueID,
+      orderNumber,
       customer: id,
       items,
       price: totalPrice,
@@ -26,7 +28,7 @@ router.route('/:id')
       subject: 'Новый заказ!',
       html:
                 `<strong> 
-            Заказ №${order._id.toString().slice(-6)} для клиента ${user.name}
+            Заказ №${order.orderNumber} для клиента ${user.name}
             Следующие позиции: ${itemsToString.map((el) => el.title)}
             На сумму ${totalPrice} руб
            </strong>`,

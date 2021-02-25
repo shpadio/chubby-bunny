@@ -15,7 +15,8 @@ module.exports = {
     'class-methods-use-this': 'off',
     'no-underscore-dangle': 'off',
     'no-multiple-empty-lines': 'off',
-    'no-param-reassign': 'off'
+    'no-param-reassign': 'off',
+    'max-len': 'off'
   },
   settings: {
     'import/resolver': {

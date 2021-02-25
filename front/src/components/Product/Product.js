@@ -23,14 +23,14 @@ function Product({ product }) {
 
   const putToCartHandler = (event, title,
     price,
-    description, file, _id, uniqueID = performance.now().toFixed()) => {
+    description, file, _id) => {
     event.preventDefault();
     if (isAuth) {
       setOpen(true);
       dispatch({
         type: ADD_TO_CART_PRODUCT,
         payload: {
-          title, price, description, file, _id, uniqueID
+          title, price, description, file, _id
         }
       });
     } else history.push('/signup');
