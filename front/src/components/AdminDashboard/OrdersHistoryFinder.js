@@ -1,10 +1,27 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import Select from 'react-select';
 
 function OrdersHistoryFinder() {
   const search = useRef();
 
+
+
   const orders = useSelector((state) => state.admin.statistics.orders);
+
+
+  useEffect(() => {
+
+  }, [orders]);
+
+  const selectOptions = orders.map((el) => ({ value: el.customer.email, label: el.orderNumber }));
+
+  const values = selectOptions.map((el) => Object.values(el));
+  console.log(...values);
+
+  console.log(orders);
+  console.log(selectOptions);
+
   useEffect(() => {
     search.current.focus();
   }, []);
@@ -14,12 +31,10 @@ function OrdersHistoryFinder() {
             <nav style={{ width: '500px', marginLeft: '200px', backgroundColor: 'white' }}>
                 <div className="nav-wrapper">
                     <form>
-                        <div className="input-field">
-                            <input ref={search} id="search" type="search"/>
-                            <label className="label-icon" htmlFor="search"><i className="fas fa-search"></i></label>
+                        <div className="input-field" style={{ color: 'black' }} >
+                            <Select ref={search} options={selectOptions}/>
                         </div>
                     </form>
-
                 </div>
             </nav>
             <div>

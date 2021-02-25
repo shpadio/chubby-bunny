@@ -18,7 +18,7 @@ function Statistics() {
       <h3>Статистика</h3>
       <p>Количество загеристрированных клиентов:{statistics.users.length}</p>
       <p>Общее количество заказов:{statistics.orders.length}</p>
-      <p>Сумма выручки:{statistics.orders.map((el) => el.price).reduce((a, b) => a + b)}</p>
+      <p>Сумма выручки:{statistics && statistics.orders.map((el) => el.price).reduce((a, b) => a + b)}</p>
     </div>
   );
 }
