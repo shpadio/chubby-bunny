@@ -17,6 +17,7 @@ import logo from '../../logo.png';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import { AUTH_SUCCESSFULLY } from '../../redux/types';
 import { getStatisticsFetchAC } from '../../redux/AC/adminAC';
+import About from '../About/About';
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -60,6 +61,7 @@ function App() {
                          {isAdmin ? <ProtectedRouter Component={AdminDashboard} path="/profile"/>
                            : <ProtectedRouter Component={Profile} path="/profile"/>}
                           <ProtectedRouter Component={Logout} path="/logout"/>
+                    <Route path="/about"><About/></Route>
                 </Switch>
             </Router>
 

@@ -6,6 +6,7 @@ import {
 import Statistics from './Statistics';
 import ItemsHandling from './ItemsHandling';
 import OrdersHistoryFinder from './OrdersHistoryFinder';
+import News from './News';
 
 
 
@@ -23,12 +24,15 @@ function AdminDashboard() {
                             товаром</Link>
                         <Link to='/orders_history' className="collection-item" style={{ color: 'rgb(67, 84, 103)' }}>История
                             заказов</Link>
+                        <Link to='/news' className="collection-item" style={{ color: 'rgb(67, 84, 103)' }}>Добавление новостей
+                            </Link>
                     </div>
                     <div>
                         <Switch>
                             <Route path='/profile'><Statistics/></Route>
                             <Route path='/add_item'><ItemsHandling/></Route>
                             <Route path='/orders_history'><OrdersHistoryFinder/></Route>
+                            <Route path='/news'><News/></Route>
                         </Switch>
                     </div>
                 </div>
