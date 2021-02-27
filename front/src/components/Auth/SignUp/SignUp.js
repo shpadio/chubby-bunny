@@ -13,6 +13,8 @@ function SignUp() {
     email: '',
     password: ''
   });
+
+
   const handleChange = ({ target: { name, value } }) => {
     setInputs({
       ...inputs,

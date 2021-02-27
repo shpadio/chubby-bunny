@@ -1,6 +1,6 @@
 
 import {
-  AUTH_SUCCESSFULLY, INIT_PROFILE, LOGOUT, AUTH_ERROR
+  AUTH_SUCCESSFULLY, INIT_PROFILE, LOGOUT, AUTH_ERROR, UPDATE_DATA
 
 } from '../types';
 
@@ -9,6 +9,7 @@ export const authSuccesfullyAC = (user) => ({ type: AUTH_SUCCESSFULLY, payload: 
 export const logoutAC = () => ({ type: LOGOUT });
 export const authErrorAC = (error) => ({ type: AUTH_ERROR, payload: error });
 export const initProfileAC = (orders) => ({ type: INIT_PROFILE, payload: orders });
+export const updateDataAC = (data) => ({ type: UPDATE_DATA, payload: data });
 
 // THUNK
 export const signUpFetchAC = ({ name, email, password }) => (dispatch) => {

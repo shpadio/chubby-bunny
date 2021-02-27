@@ -1,5 +1,5 @@
 import {
-  LOGOUT, AUTH_SUCCESSFULLY, INIT_PROFILE, AUTH_ERROR
+  LOGOUT, AUTH_SUCCESSFULLY, INIT_PROFILE, AUTH_ERROR, UPDATE_DATA
 } from '../types';
 
 const windowState = JSON.parse(window.localStorage.getItem('state'));
@@ -24,6 +24,9 @@ const authReducer = (state = preloadState, action) => {
 
     case INIT_PROFILE:
       return { ...state, user: { ...state.user, orders: action.payload } };
+    case UPDATE_DATA:
+      return { ...state, user: { ...state.user, name: action.payload.name, email: action.payload.email } };
+
     case LOGOUT:
       window.localStorage.removeItem('state');
       window.localStorage.removeItem('token');

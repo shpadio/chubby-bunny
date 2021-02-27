@@ -2,7 +2,7 @@
 export const AUTH_SUCCESSFULLY = 'AUTH_SUCCESSFULLY';
 export const LOGOUT = 'LOGOUT';
 export const AUTH_ERROR = 'AUTH_ERROR';
-
+export const UPDATE_DATA = 'UPDATE_DATA';
 
 // ADMIN
 export const INIT_PRODUCTS = 'INIT_PRODUCTS';
