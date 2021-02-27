@@ -12,7 +12,7 @@ function Profile() {
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     dispatch(initProfileFetchAC(user));
-  }, [user]);
+  }, [user.name]);
 
   const orders = useSelector((state) => state.auth.user.orders);
 

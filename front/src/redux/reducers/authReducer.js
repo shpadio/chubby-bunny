@@ -1,5 +1,5 @@
 import {
-  LOGOUT, AUTH_SUCCESSFULLY, INIT_PROFILE, AUTH_ERROR, UPDATE_DATA
+  LOGOUT, AUTH_SUCCESSFULLY, INIT_PROFILE, AUTH_ERROR, UPDATE_DATA, CHANGE_ERROR
 } from '../types';
 
 const windowState = JSON.parse(window.localStorage.getItem('state'));
@@ -10,7 +10,7 @@ if (windowState && windowState.auth) {
     user: windowState.auth.user
   };
 } else {
-  preloadState = { isAuth: false, user: {} };
+  preloadState = { isAuth: false, user: {}, authError: null };
 }
 
 const authReducer = (state = preloadState, action) => {
@@ -21,7 +21,8 @@ const authReducer = (state = preloadState, action) => {
       };
     case AUTH_ERROR:
       return { ...state, authError: action.payload };
-
+    case CHANGE_ERROR:
+      return { ...state, changeError: action.payload };
     case INIT_PROFILE:
       return { ...state, user: { ...state.user, orders: action.payload } };
     case UPDATE_DATA:
@@ -31,7 +32,7 @@ const authReducer = (state = preloadState, action) => {
       window.localStorage.removeItem('state');
       window.localStorage.removeItem('token');
       return {
-        ...state, isAuth: false, user: { }
+        ...state, isAuth: false, user: { }, authError: null, changeError: null
       };
     default:
       return state;
