@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authErrorAC, updateDataAC } from '../../redux/AC/authAC';
+import { changeErrorAC, updateDataAC } from '../../redux/AC/authAC';
 
 function Change() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const error = useSelector((state) => state.auth.authError);
+  const error = useSelector((state) => state.auth.changeError);
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
 
@@ -23,7 +23,7 @@ function Change() {
       if (response.status === 200) {
         dispatch(updateDataAC({ name, email }));
       } else {
-        dispatch(authErrorAC('Такая почта уже зарегистрирована!'));
+        dispatch(changeErrorAC('Такая почта уже зарегистрирована!'));
       }
     });
   };
