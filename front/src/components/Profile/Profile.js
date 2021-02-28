@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { initProfileFetchAC } from '../../redux/AC/authAC';
 import Change from './Change';
 
 
-import { initProfileFetchAC } from '../../redux/AC/authAC';
+
 
 function Profile() {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ function Profile() {
   }, [user.name]);
 
   const orders = useSelector((state) => state.auth.user.orders);
+
+
 
 
   return (

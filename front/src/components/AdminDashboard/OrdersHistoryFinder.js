@@ -11,24 +11,7 @@ function OrdersHistoryFinder() {
 
   const selectOptions = orders.map((el) => ({ value: el.customer.email, label: el.orderNumber }));
 
-  let values = selectOptions.map((el) => Object.values(el));
-  values = values.flat(1);
 
-
-  const labels = [];
-  for (let i = 1; i < values.length; i += 2) {
-    labels.push(values[i]);
-  }
-
-  // orders = orders.filter((el) => labels.includes(el.orderNumber));
-  useEffect(() => {
-    orders.filter((el) => labels.includes(el.orderNumber));
-  });
-
-
-
-  // console.log(orders);
-  // console.log(selectOptions);
 
   useEffect(() => {
     search.current.focus();

@@ -3,6 +3,7 @@ import multer from 'multer';
 import Product from '../models/Product.js';
 import User from '../models/User.js';
 import Order from '../models/Order.js';
+import News from '../models/News.js';
 
 const DIR = './public/';
 const storage = multer.diskStorage({
@@ -37,10 +38,11 @@ router.route('/')
   })
 
   .post(upload.single('file'), async (req, res) => {
+    const { title, description, price } = req.body;
     const product = Product.create({
-      title: req.body.title,
-      description: req.body.description,
-      price: req.body.price,
+      title,
+      description,
+      price,
       file: `http://localhost:4000/public/${req.file.filename}`,
     });
     res.json(product);
@@ -48,13 +50,28 @@ router.route('/')
 
   .put(async (req, res) => {
     const { id } = req.body;
-
     const product = await Product.findById(id);
-
     product.visible = !product.visible;
     await product.save();
-
     res.status(200).end();
+  });
+
+router.route('/news')
+
+  .post(upload.single('file'), async (req, res) => {
+    const { title, text } = req.body;
+
+    const news = await News.create({
+      title,
+      text,
+      file: `http://localhost:4000/public/${req.file.filename}`,
+    });
+
+    if (news) {
+      res.status(200).json(news);
+    } else {
+      res.status(500).end();
+    }
   });
 
 export default router;
