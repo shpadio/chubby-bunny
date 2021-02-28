@@ -1,15 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
+
 import Order from './Order';
 
 function OrdersHistoryFinder() {
   const search = useRef();
 
 
+
   const orders = useSelector((state) => state.admin.statistics.orders);
 
   const selectOptions = orders.map((el) => ({ value: el.customer.email, label: el.orderNumber }));
+
+
 
 
 
@@ -23,14 +27,14 @@ function OrdersHistoryFinder() {
                 <div className="nav-wrapper">
                     <form>
                         <div className="input-field" style={{ color: 'black' }} >
-                            <Select ref={search} options={selectOptions}/>
+                             <Select ref={search} options={selectOptions}/>
                         </div>
                     </form>
                 </div>
             </nav>
             <div>
                 <div>
-                     <Order orders={orders}/>
+                     <Order key={performance.now()} orders={orders}/>
                 </div>
 
 
