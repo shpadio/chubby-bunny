@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { getStatisticsAC, initProductsAC } from '../AC/adminAC';
-import { ADD_PRODUCT } from '../types';
+import { addProductsAC, getStatisticsAC, initProductsAC } from '../AC/adminAC';
+
 
 export const initProductsFetchAC = () => (dispatch) => {
   fetch(`${process.env.REACT_APP_URL}/`)
@@ -15,10 +15,7 @@ export const addProductFetchAC = (formData) => (dispatch) => {
     }
   })
     .then(() => {
-      dispatch({
-        type: ADD_PRODUCT,
-        payload: { formData }
-      });
+      dispatch(addProductsAC(formData));
     });
 };
 
