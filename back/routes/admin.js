@@ -53,7 +53,8 @@ router.route('/')
     const product = await Product.findById(id);
     product.visible = !product.visible;
     await product.save();
-    res.status(200).end();
+    console.log(product);
+    res.status(200).json(product);
   });
 
 router.route('/news')
