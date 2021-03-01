@@ -34,7 +34,7 @@ export const hideProductsFetchAC = (id) => (dispatch) => {
     headers: {
       'content-type': 'application/json'
     },
-    body: JSON.stringify({ id })
+    body: JSON.stringify({ id }) 
   }).then((response) => (response.json()))
     .then((data) => dispatch(hideProductsAC(data._id)));
 };
