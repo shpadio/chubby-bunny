@@ -7,7 +7,8 @@ let preloadState = {};
 if (windowState && windowState.auth) {
   preloadState = {
     isAuth: windowState.auth.isAuth,
-    user: windowState.auth.user
+    user: windowState.auth.user,
+    customer: windowState.customer
   };
 } else {
   preloadState = { isAuth: false, user: {}, authError: null };
@@ -32,7 +33,7 @@ const authReducer = (state = preloadState, action) => {
       window.localStorage.removeItem('state');
       window.localStorage.removeItem('token');
       return {
-        ...state, isAuth: false, user: { }, authError: null, changeError: null
+        ...state, isAuth: false, user: { }, authError: null, changeError: null, customer: {}
       };
     default:
       return state;
