@@ -6,12 +6,18 @@ import { initProductsFetchAC } from '../../redux/Thunk/adminFetchesAC';
 
 function ProductList() {
   const dispatch = useDispatch();
+
+
+  let products = useSelector((state) => state.admin.products);
+
   useEffect(() => {
     dispatch(initProductsFetchAC());
   }, []);
 
-  let products = useSelector((state) => state.admin.products);
   products = products.filter((el) => el.visible);
+
+
+
 
 
   return (
