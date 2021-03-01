@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { addProductsAC, getStatisticsAC, initProductsAC } from '../AC/adminAC';
+import {
+  addProductsAC, getStatisticsAC, initProductsAC, hideProductsAC
+} from '../AC/adminAC';
 
 
 export const initProductsFetchAC = () => (dispatch) => {
@@ -26,3 +28,13 @@ export const getStatisticsFetchAC = () => (dispatch) => {
     .then((data) => dispatch(getStatisticsAC(data)));
 };
 
+export const hideProductsFetchAC = (id) => (dispatch) => {
+  fetch(`${process.env.REACT_APP_URL}/admin`, {
+    method: 'put',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({ id })
+  }).then((response) => (response.json()))
+    .then((data) => dispatch(hideProductsAC(data._id)));
+};

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProductFetchAC } from '../../redux/Thunk/adminFetchesAC';
+import { addProductFetchAC, hideProductsFetchAC } from '../../redux/Thunk/adminFetchesAC';
 
 function ItemsHandling() {
   const dispatch = useDispatch();
@@ -11,13 +11,7 @@ function ItemsHandling() {
 
   const hideHandler = (event) => {
     const { id } = event.target;
-    fetch(`${process.env.REACT_APP_URL}/admin`, {
-      method: 'put',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ id })
-    }).then((response) => (response.status === 200 ? '' : setError('Упс!')));
+    dispatch(hideProductsFetchAC(id, setError));
   };
 
   const formHandler = (event) => {
