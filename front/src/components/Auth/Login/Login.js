@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loginFetchAC } from '../../../redux/AC/authAC';
+import { loginFetchAC } from '../../../redux/Thunk/authFetchesAC';
 
 function Login() {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import React from 'react';
 function Order({ orders }) {
   return (
         <div>
-            {orders && orders.map((el) => <ul>
+            {orders && orders.map((el) => <ul key={performance.now()}>
                 <li><span>Имя клиента:{el.customer.name}</span></li>
                 <li><span>Почта клиента:{el.customer.email}</span></li>
                 <li><span>Дата: {el.dateOfOrder}</span></li>

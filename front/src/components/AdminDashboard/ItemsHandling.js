@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { ADD_PRODUCT } from '../../redux/types';
+import { addProductFetchAC } from '../../redux/Thunk/adminFetchesAC';
 
 function ItemsHandling() {
   const dispatch = useDispatch();
   const [pic, setPic] = useState({ file: '' });
   const products = useSelector((state) => state.admin.products);
   const [error, setError] = useState('');
-
 
 
   const hideHandler = (event) => {
@@ -35,22 +33,7 @@ function ItemsHandling() {
     formData.append('description', description);
     formData.append('price', price);
     formData.append('file', pic.file);
-    axios.post(`${process.env.REACT_APP_URL}/admin/`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-      .then(({ data }) => {
-        dispatch({
-          type: ADD_PRODUCT,
-          payload: {
-            description: data.description,
-            price: data.price,
-            title: data.title,
-            file: pic.file
-          }
-        });
-      });
+    dispatch(addProductFetchAC(formData));
   };
 
   const onFileChange = (e) => {
@@ -65,7 +48,7 @@ function ItemsHandling() {
             <div style={{ marginLeft: 'auto', marginRight: 'auto' }}>Продукты в наличии:</div>
             <div style={{ display: 'flex' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-                    {products && products.map((el) => <ul key={el._id}>
+                    {products && products.map((el) => <ul key={performance.now()}>
                         <li>
                             <p>{el.title}</p>
                             <p><img style={{ width: '150px', height: '150px' }} src={el.file}/></p>

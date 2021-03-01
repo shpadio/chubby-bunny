@@ -18,9 +18,11 @@ function News() {
   };
 
 
+
+
   const { title, text } = inputs;
 
-
+  //
   const formHandler = (event) => {
     event.preventDefault();
 
@@ -28,13 +30,12 @@ function News() {
   };
 
 
-
   const onFileChange = () => {
 
   };
   return (
       <div>
-          <form onSubmit={formHandler} method="POST" encType="multipart/form-data" action="/profile" style={{
+          <form onSubmit={formHandler} method="POST" encType="multipart/form-data" style={{
             width: '450px',
             padding: '30px',
             marginRight: '50px',

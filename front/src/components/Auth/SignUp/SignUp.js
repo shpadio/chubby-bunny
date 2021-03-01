@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { signUpFetchAC } from '../../../redux/AC/authAC';
+import { signUpFetchAC } from '../../../redux/Thunk/authFetchesAC';
+
 
 function SignUp() {
   const dispatch = useDispatch();
