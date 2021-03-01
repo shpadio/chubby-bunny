@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { initProfileFetchAC } from '../../redux/AC/authAC';
+import { initProfileFetchAC } from '../../redux/Thunk/authFetchesAC';
 import Change from './Change';
 
 

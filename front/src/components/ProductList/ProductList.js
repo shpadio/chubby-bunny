@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Product from '../Product/Product';
-import { initProductsFetchAC } from '../../redux/AC/adminAC';
+import { initProductsFetchAC } from '../../redux/Thunk/adminFetchesAC';
+
 
 function ProductList() {
   const dispatch = useDispatch();
-
-
   useEffect(() => {
     dispatch(initProductsFetchAC());
   }, []);

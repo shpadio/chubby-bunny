@@ -18,6 +18,8 @@ function News() {
   };
 
 
+
+
   const { title, text } = inputs;
 
   //

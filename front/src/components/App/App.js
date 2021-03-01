@@ -16,14 +16,17 @@ import Footer from '../Footer/Footer';
 import logo from '../../logo.png';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import { AUTH_SUCCESSFULLY } from '../../redux/types';
-import { getStatisticsFetchAC } from '../../redux/AC/adminAC';
+
 import About from '../About/About';
+import { getStatisticsFetchAC } from '../../redux/Thunk/adminFetchesAC';
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
   const isAdmin = useSelector((state) => state.auth.user.isAdmin);
   const token = localStorage.getItem('token');
   const dispatch = useDispatch();
+
+
 
 
   const verifyToken = () => {
