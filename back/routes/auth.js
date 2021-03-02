@@ -44,7 +44,7 @@ router.route('/login')
 
 router.route('/logout')
   .get(async (req, res) => {
-    res.status(200).end();
+    res.status(200).json('ok!').end();
   });
 
 export default router;

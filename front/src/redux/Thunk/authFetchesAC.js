@@ -1,6 +1,6 @@
 // THUNK
 import {
-  authErrorAC, authSuccesfullyAC, initProfileAC, logoutAC
+  authErrorAC, authSuccesfullyAC, initProfileAC
 } from '../AC/authAC';
 
 export const signUpFetchAC = ({ name, email, password }) => (dispatch) => {
@@ -44,10 +44,12 @@ export const loginFetchAC = ({ email, password }) => (dispatch) => {
 };
 
 
-export const logoutFetchAC = (dispatch) => {
-  fetch(`${process.env.REACT_APP_URL}/auth/logout`)
-    .then(() => dispatch(logoutAC()));
-};
+// export const logoutFetchAC = (dispatch) => {
+//   fetch(`${process.env.REACT_APP_URL}/auth/logout`)
+//     .then((response) => response.json())
+//     .then((data) => console.log(data))
+//     .then(() => dispatch(logoutAC()));
+// };
 
 
 export const initProfileFetchAC = (user) => (dispatch) => {
