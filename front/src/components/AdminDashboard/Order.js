@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Order({ orders }) {
-  console.log(orders);
   return (
         <div>
             {orders && orders.map((el) => <ul key={el.orderNumber}>
