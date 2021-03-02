@@ -18,10 +18,10 @@ function ShoppingCart() {
 
     products.forEach((el) => { el.quantity = 1; });
     const result = Object.values(products.reduce((r, {
-      key, _id, file, title, description, quantity, price
+      key, _id, file, title, description, quantity, price, uniqueID
     }) => {
       r[title] = r[title] || {
-        key, _id, file, title, description, quantity, price: 0
+        key, _id, file, title, description, quantity, price: 0, uniqueID
       };
       r[title].price += price;
       r[title].quantity += quantity;
@@ -34,6 +34,7 @@ function ShoppingCart() {
     event.preventDefault();
     dispatch({ type: 'DELETE_ITEM', payload: event.target.parentNode.id });
   };
+
 
 
 

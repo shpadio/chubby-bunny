@@ -24,14 +24,15 @@ function Product({ product }) {
 
   const putToCartHandler = (event, title,
     price,
-    description, file, _id) => {
+    description, file, _id, uniqueID = performance.now().toFixed()) => {
     event.preventDefault();
+    console.log(uniqueID);
     if (isAuth) {
       setOpen(true);
       dispatch({
         type: ADD_TO_CART_PRODUCT,
         payload: {
-          title, price, description, file, _id
+          title, price, description, file, _id, uniqueID
         }
       });
     } else history.push('/signup');
@@ -44,7 +45,7 @@ function Product({ product }) {
     <div className="row" >
       <div className="col s12 m12" >
         <div className="card">
-          <form className={styles.form} onSubmit={(event) => { putToCartHandler(event, product.title, product.price, product.description, product.file, product._id); }} >
+          <form className={styles.form} onSubmit={(event) => { putToCartHandler(event, product.title, product.price, product.description, product.file, product._id, product.uniqueID); }} >
             <div className="card-image">
               <img src={product.file} className={styles.img} />
             </div>

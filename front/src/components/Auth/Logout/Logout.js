@@ -6,8 +6,9 @@ import { logoutFetchAC } from '../../../redux/Thunk/authFetchesAC';
 function Logout() {
   const dispatch = useDispatch();
 
+
   useEffect(() => {
-    logoutFetchAC(dispatch);
+    dispatch(logoutFetchAC());
   }, []);
 
   return (
