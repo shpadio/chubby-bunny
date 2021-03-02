@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeErrorAC, updateDataAC } from '../../redux/AC/authAC';
+import changeInfoFetchAC from '../../redux/Thunk/customerFetchesAC';
 
 function Change() {
   const dispatch = useDispatch();
@@ -10,22 +10,9 @@ function Change() {
   const [email, setEmail] = useState(user.email);
 
 
-
   const changeHandler = (event) => {
     event.preventDefault();
-    fetch(`${process.env.REACT_APP_URL}/profile/${user._id}`, {
-      method: 'put',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ name, email })
-    }).then((response) => {
-      if (response.status === 200) {
-        dispatch(updateDataAC({ name, email }));
-      } else {
-        dispatch(changeErrorAC('Такая почта уже зарегистрирована!'));
-      }
-    });
+    dispatch(changeInfoFetchAC(name, email, user));
   };
 
   return (

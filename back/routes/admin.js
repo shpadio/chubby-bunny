@@ -53,7 +53,6 @@ router.route('/')
     const product = await Product.findById(id);
     product.visible = !product.visible;
     await product.save();
-    console.log(product);
     res.status(200).json(product);
   });
 

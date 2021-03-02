@@ -14,9 +14,6 @@ function OrdersHistoryFinder() {
   const selectOptions = orders.map((el) => ({ value: el.customer.email, label: el.orderNumber }));
 
 
-
-
-
   useEffect(() => {
     search.current.focus();
   }, []);

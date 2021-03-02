@@ -1,20 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import styles from './Statistics.css';
+
 
 function Statistics() {
   const statistics = useSelector((state) => state.admin.statistics);
 
   return (
-    <div style={{
-      width: '700px',
-      marginLeft: '120px',
-      padding: '30px',
-      border: '10px pink solid',
-      borderRadius: '15px',
-      alignContent: 'spaceAround',
-      justifyContent: 'center',
-      alignItems: 'center'
-    }}>
+    <div className={styles.form}>
       <h3>Статистика</h3>
       <p>Количество загеристрированных клиентов:{statistics.users.length}</p>
       <p>Общее количество заказов:{statistics.orders.length}</p>
