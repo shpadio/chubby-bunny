@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { logoutFetchAC } from '../../../redux/Thunk/authFetchesAC';
+import { logoutAC } from '../../../redux/AC/authAC';
+
 
 
 function Logout() {
@@ -8,7 +9,7 @@ function Logout() {
 
 
   useEffect(() => {
-    dispatch(logoutFetchAC());
+    dispatch(logoutAC());
   }, []);
 
   return (
