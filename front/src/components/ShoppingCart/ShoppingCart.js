@@ -36,6 +36,7 @@ function ShoppingCart() {
   };
 
 
+  console.log(toBuy);
 
   const buyHandler = () => {
     if (toBuy.length > 0) {
