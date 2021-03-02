@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styles from './ProductList.module.css';
 import Product from '../Product/Product';
 import { initProductsFetchAC } from '../../redux/Thunk/adminFetchesAC';
 
@@ -23,9 +24,7 @@ function ProductList() {
   return (
 
         <div>
-          <div style={{
-            display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', marginTop: '50px'
-          }}>
+          <div className={styles.list}>
           {products && products.map(((product) => <Product key={product._id} product={product}/>))}
         </div>
         </div>

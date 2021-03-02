@@ -27,7 +27,7 @@ const adminReducer = (state = preloadState, action) => {
     case EDIT_PRODUCT:
       return {
         ...state,
-        products: [...state.products.map((el) => {
+        products: [...state.products.forEach((el) => {
           if (el._id === action.payload._id) {
             return action.payload;
           }
