@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styles from './Statistics.css';
+import styles from './Statistics.module.css';
 
 
 function Statistics() {

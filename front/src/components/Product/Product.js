@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import styles from './Product.module.css';
 import { ADD_TO_CART_PRODUCT } from '../../redux/types';
 import ModalWindow from './ModalWindow';
 
@@ -43,19 +44,11 @@ function Product({ product }) {
     <div className="row" >
       <div className="col s12 m12" >
         <div className="card">
-          <form style={{ width: '300px', height: '400px' }} onSubmit={(event) => { putToCartHandler(event, product.title, product.price, product.description, product.file, product._id); }} >
+          <form className={styles.form} onSubmit={(event) => { putToCartHandler(event, product.title, product.price, product.description, product.file, product._id); }} >
             <div className="card-image">
-              <img src={product.file} style={{
-                maxWidth: '150px',
-                maxHeight: '200px',
-                marginLeft: 'auto',
-                marginRight: 'auto'
-              }} />
+              <img src={product.file} className={styles.img} />
             </div>
-            <span className="card-content" name="title" style={{
-              color: 'black',
-              fontWeight: 'bold'
-            }}>
+            <span className={styles.cardContent} name="title">
               {product.title}
             </span>
             <div className="card-content" style={{ height: '100px' }}>
