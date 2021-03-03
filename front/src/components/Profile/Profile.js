@@ -29,8 +29,6 @@ function Profile() {
                 <ul>
                     { orders && orders.map(((el) => <p key={performance.now()}>
                         <li > <span>Дата: {el.dateOfOrder}</span></li>
-                        {/*  */}
-                        {/*  */}
                         <li > <span>Номер: {el.orderNumber}</span></li>
                         <li ><span>Стоимость: {el.price} руб</span></li>
                     </p>)) }
