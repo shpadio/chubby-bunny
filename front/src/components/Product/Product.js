@@ -26,7 +26,6 @@ function Product({ product }) {
     price,
     description, file, _id, uniqueID = performance.now().toFixed()) => {
     event.preventDefault();
-    console.log(uniqueID);
     if (isAuth) {
       setOpen(true);
       dispatch({

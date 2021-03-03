@@ -51,7 +51,7 @@ function App() {
                 </div>
                 <div>
                     <img src={logo} alt={'logo'} style={{
-                      maxWidth: '100%', height: '200px', marginLeft: '40%'
+                      maxWidth: '100%', height: '200px', marginLeft: '12%'
                     }}/>
                 </div>
                 <Switch>
