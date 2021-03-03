@@ -42,6 +42,12 @@ function App() {
   useEffect(verifyToken, dispatch(getStatisticsFetchAC()), []);
 
 
+  // isAdmin ? useEffect(() => {
+  //
+  // }) : '';
+
+
+
   return (
         <div>
 
