@@ -4,7 +4,6 @@ import config from './middlewares/index.js';
 import authRouter from './routes/auth.js';
 import mainRouter from './routes/main.js';
 import adminRouter from './routes/admin.js';
-import productRouter from './routes/products.js';
 import profileRouter from './routes/profile.js';
 import verifyRouter from './routes/verification.js';
 import cartRouter from './routes/cart.js';
