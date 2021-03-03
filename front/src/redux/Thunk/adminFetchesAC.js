@@ -15,10 +15,9 @@ export const addProductFetchAC = (formData) => (dispatch) => {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
-  })
-    .then(() => {
-      dispatch(addProductsAC(formData));
-    });
+  }).then(() => {
+    dispatch(addProductsAC(formData));
+  });
 };
 
 
