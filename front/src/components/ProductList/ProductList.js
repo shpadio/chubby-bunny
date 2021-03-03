@@ -12,7 +12,7 @@ function ProductList() {
 
   useEffect(() => {
     dispatch(initProductsFetchAC());
-  }, [products]);
+  }, [dispatch]);
 
   products = products.filter((el) => el.visible);
 

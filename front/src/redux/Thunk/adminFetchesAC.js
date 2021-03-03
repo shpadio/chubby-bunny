@@ -17,6 +17,8 @@ export const addProductFetchAC = (formData) => (dispatch) => {
     }
   }).then(() => {
     dispatch(addProductsAC(formData));
+  }).then(() => {
+    dispatch(initProductsFetchAC());
   });
 };
 

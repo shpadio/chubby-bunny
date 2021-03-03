@@ -48,9 +48,6 @@ function ItemsHandling() {
     setPic({ file: e.target.files[0] });
   };
 
-
-
-
   return (
     <>
       <div style={{ marginLeft: 'auto', marginRight: 'auto' }}>Продукты в наличии:</div>
